@@ -10,7 +10,6 @@
         cognome varchar(255),
         email varchar(255),
         nome varchar(255),
-        paolo varchar(255),
         password varchar(255),
         role varchar(255) check (role in ('ADMIN','USER')),
         username varchar(255),

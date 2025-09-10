@@ -625,3 +625,99 @@ This generated password is for development use only. Your security configuration
 2025-09-10T16:12:00.731+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path '/'
 2025-09-10T16:12:00.735+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Started BackendArticoliSportiviApplication in 0.865 seconds (process running for 737.004)
 2025-09-10T16:12:00.736+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-10T16:13:20.296+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-09-10T16:13:20.297+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-7] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-10T16:13:20.302+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-10T16:13:20.304+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10T16:13:20.306+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-09-10T16:13:20.308+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-09-10T16:13:20.388+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Starting BackendArticoliSportiviApplication using Java 21.0.7 with PID 22032 (C:\Users\Ho\eclipse-workspace\progetti-eclipse-betacom\Betacom\Backend-ArticoliSportivi\target\classes started by Ho in C:\Users\Ho\eclipse-workspace\progetti-eclipse-betacom\Betacom\Backend-ArticoliSportivi)
+2025-09-10T16:13:20.389+02:00 DEBUG 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-10T16:13:20.389+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-10T16:13:20.578+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T16:13:20.578+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-09-10T16:13:20.580+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JDBC repository interfaces.
+2025-09-10T16:13:20.583+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T16:13:20.583+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-10T16:13:20.585+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JPA repository interfaces.
+2025-09-10T16:13:20.661+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9090 (http)
+2025-09-10T16:13:20.661+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-10T16:13:20.662+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-10T16:13:20.685+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-10T16:13:20.685+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 294 ms
+2025-09-10T16:13:20.709+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-09-10T16:13:20.766+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@68d7044f
+2025-09-10T16:13:20.766+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-09-10T16:13:20.768+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-10T16:13:20.771+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-10T16:13:20.780+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-10T16:13:20.793+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 17.5
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-10T16:13:20.877+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-10T16:13:20.883+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10T16:13:20.941+02:00  WARN 22032 --- [Backend-ArticoliSportivi] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10T16:13:21.110+02:00  WARN 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9aee390f-92ba-4049-a571-27ba619d5e31
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-09-10T16:13:21.111+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-09-10T16:13:21.154+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-10T16:13:21.171+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path '/'
+2025-09-10T16:13:21.176+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Started BackendArticoliSportiviApplication in 0.811 seconds (process running for 817.445)
+2025-09-10T16:13:21.178+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-10T16:13:55.081+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-09-10T16:13:55.082+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-11] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-10T16:13:55.087+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-10T16:13:55.088+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10T16:13:55.090+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2025-09-10T16:13:55.092+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2025-09-10T16:13:55.171+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Starting BackendArticoliSportiviApplication using Java 21.0.7 with PID 22032 (C:\Users\Ho\eclipse-workspace\progetti-eclipse-betacom\Betacom\Backend-ArticoliSportivi\target\classes started by Ho in C:\Users\Ho\eclipse-workspace\progetti-eclipse-betacom\Betacom\Backend-ArticoliSportivi)
+2025-09-10T16:13:55.171+02:00 DEBUG 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-10T16:13:55.171+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-10T16:13:55.364+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T16:13:55.364+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-09-10T16:13:55.366+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JDBC repository interfaces.
+2025-09-10T16:13:55.372+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T16:13:55.372+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-10T16:13:55.375+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
+2025-09-10T16:13:55.502+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9090 (http)
+2025-09-10T16:13:55.503+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-10T16:13:55.503+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-10T16:13:55.537+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-10T16:13:55.538+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 364 ms
+2025-09-10T16:13:55.594+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-09-10T16:13:55.681+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@70421fd0
+2025-09-10T16:13:55.682+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-09-10T16:13:55.683+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-10T16:13:55.688+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-10T16:13:55.703+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-10T16:13:55.717+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 17.5
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-10T16:13:55.796+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-10T16:13:55.802+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10T16:13:55.875+02:00  WARN 22032 --- [Backend-ArticoliSportivi] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10T16:13:56.196+02:00  WARN 22032 --- [Backend-ArticoliSportivi] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e8220a3d-0ffa-4bcb-9f2a-9ecfb4016bad
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-09-10T16:13:56.198+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-09-10T16:13:56.276+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-10T16:13:56.305+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path '/'
+2025-09-10T16:13:56.311+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] c.b.j.BackendArticoliSportiviApplication : Started BackendArticoliSportiviApplication in 1.173 seconds (process running for 852.58)
+2025-09-10T16:13:56.313+02:00  INFO 22032 --- [Backend-ArticoliSportivi] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
