@@ -16,7 +16,7 @@ public class ArticoloScarpaReq {
 	private String categoria;
     private Double prezzo;
     private String descrizione;
-    private Integer bestSeller;
+    //private Integer bestSeller;
     private Integer tagliaScarpe;
     
 }

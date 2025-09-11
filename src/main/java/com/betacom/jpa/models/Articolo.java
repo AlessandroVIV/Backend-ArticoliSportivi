@@ -20,7 +20,7 @@ public class Articolo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-    private String nomeArticolo;
+    private String nome;
     
     @ManyToOne
     @JoinColumn(name = "genere_id", nullable = false)
@@ -38,7 +38,7 @@ public class Articolo {
     
     private String descrizione;
     
-    private Integer bestSeller;
+    //private Integer bestSeller;
 
     private Integer tagliaScarpe;
     

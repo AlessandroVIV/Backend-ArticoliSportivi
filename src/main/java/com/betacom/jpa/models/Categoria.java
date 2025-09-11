@@ -18,6 +18,6 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nomeSport;
+	private String nome;
 	
 }

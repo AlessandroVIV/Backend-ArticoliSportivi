@@ -17,6 +17,6 @@ public class ArticoloIndumentoReq {
     private Double prezzo;
     private String descrizione;
     private Integer bestSeller;
-    private Integer tagliaScarpe;
+    private Integer tagliaIndumento;
     
 }
