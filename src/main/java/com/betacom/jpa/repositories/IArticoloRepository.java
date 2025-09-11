@@ -1,5 +1,6 @@
 package com.betacom.jpa.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +11,7 @@ import com.betacom.jpa.models.Articolo;
 public interface IArticoloRepository extends JpaRepository<Articolo, Integer>{
 
 	Optional<Articolo> findByNome(String nome) throws AcademyException;
+	
+	List<Articolo> findByMarca_Nome(String nome) throws AcademyException;
 	
 }

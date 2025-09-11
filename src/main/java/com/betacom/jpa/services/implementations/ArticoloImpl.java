@@ -59,7 +59,7 @@ public class ArticoloImpl implements IArticoloInterfaces{
 	    if(gen.isEmpty()) throw new AcademyException("Genere non trovato");	    
 	    art.setGenere(gen.get());
 
-	    Optional<Marca> mar = marcaRepository.findByMarca(req.getMarca());
+	    Optional<Marca> mar = marcaRepository.findByNome(req.getMarca());
 	    if(mar.isEmpty()) throw new AcademyException("Marca non trovata");
 	    art.setMarca(mar.get());
 	    

@@ -9,6 +9,6 @@ import com.betacom.jpa.models.Marca;
 
 public interface IMarcaRepository extends JpaRepository<Marca, Integer>{
 
-	Optional<Marca> findByMarca(String marca) throws AcademyException;
+	Optional<Marca> findByNome(String nome) throws AcademyException;
 	
 }

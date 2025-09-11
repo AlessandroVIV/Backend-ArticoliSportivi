@@ -10,6 +10,6 @@ import lombok.ToString;
 public class MarcaReq {
 
 	private Integer id;
-	private String marca;
+	private String nome;
 	
 }

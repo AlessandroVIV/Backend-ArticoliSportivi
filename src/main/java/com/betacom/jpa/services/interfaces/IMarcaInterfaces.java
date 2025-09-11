@@ -7,4 +7,8 @@ public interface IMarcaInterfaces {
 
 	void createMarca(MarcaReq req) throws AcademyException;
 	
+	void updateMarca(MarcaReq req) throws AcademyException;
+
+	void deleteMarca(MarcaReq req) throws AcademyException;
+	
 }
