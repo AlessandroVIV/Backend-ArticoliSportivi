@@ -22,7 +22,7 @@ public class CategoriaImpl implements ICategoriaInterfaces{
 	
 	@Override
 	public void create(CategoriaReq req) throws AcademyException {
-		// TODO Auto-generated method stub
+		
 		Optional<Categoria> c = categoriaR.findByNome(req.getNome());
 		
 		if(c.isPresent()) {

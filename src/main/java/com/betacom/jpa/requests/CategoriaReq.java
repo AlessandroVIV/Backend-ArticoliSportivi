@@ -1,7 +1,5 @@
 package com.betacom.jpa.requests;
 
-import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class CategoriaReq {
 
+	private Integer id;
 	private String nome;
 	
 }

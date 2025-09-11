@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.requests.CategoriaReq;
 import com.betacom.jpa.response.ResponseBase;
-import com.betacom.jpa.services.interfaces.ICarrelloInterfaces;
 import com.betacom.jpa.services.interfaces.ICategoriaInterfaces;
 
 @RestController
