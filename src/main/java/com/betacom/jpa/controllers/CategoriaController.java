@@ -22,8 +22,8 @@ public class CategoriaController {
 	@Autowired
 	private ICategoriaInterfaces categoriaService;
 	
-	@GetMapping("/list")
-	public ResponseList<CategoriaDTO> list() {
+	@GetMapping("/listAll")
+	public ResponseList<CategoriaDTO> listAll() {
 	    ResponseList<CategoriaDTO> r = new ResponseList<CategoriaDTO>();
 	    try {
 	        r.setDati(categoriaService.listAll());
@@ -35,7 +35,7 @@ public class CategoriaController {
 	    return r;
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/createCategoria")
 	public ResponseBase create(@RequestBody(required = true) CategoriaReq req) {
 		ResponseBase responseBase = new ResponseBase();
 		try {
@@ -48,7 +48,7 @@ public class CategoriaController {
 		return responseBase;
 	}
 	
-	@PutMapping("update")
+	@PutMapping("/updateCategoria")
 	public ResponseBase update(@RequestBody (required = true)  CategoriaReq req) {
 		ResponseBase r = new ResponseBase();
 		try {
@@ -61,7 +61,7 @@ public class CategoriaController {
 		return r;
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/deleteCategoria")
 	public ResponseBase delete(@RequestBody (required = true)  CategoriaReq req) {
 		ResponseBase r = new ResponseBase();
 		try {

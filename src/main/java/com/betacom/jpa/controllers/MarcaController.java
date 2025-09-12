@@ -22,8 +22,8 @@ public class MarcaController {
 	@Autowired
 	private IMarcaInterfaces marcaInterfaces;
 	
-	@GetMapping("/list")
-	public ResponseList<MarcaDTO> list() {
+	@GetMapping("/listAll")
+	public ResponseList<MarcaDTO> listAll() {
 	    ResponseList<MarcaDTO> r = new ResponseList<MarcaDTO>();
 	    try {
 	        r.setDati(marcaInterfaces.listAll());

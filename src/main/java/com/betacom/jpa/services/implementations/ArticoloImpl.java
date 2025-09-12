@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.betacom.jpa.dto.ArticoloDTO;
 import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Articolo;
 import com.betacom.jpa.models.Categoria;
@@ -18,12 +19,13 @@ import com.betacom.jpa.repositories.IMarcaRepository;
 import com.betacom.jpa.requests.ArticoloIndumentoReq;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.services.interfaces.IArticoloInterfaces;
+import com.betacom.jpa.utility.Builders;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class ArticoloImpl implements IArticoloInterfaces{
+public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Autowired
 	private IArticoloRepository articoloRepository;
@@ -71,15 +73,21 @@ public class ArticoloImpl implements IArticoloInterfaces{
 
 
 	@Override
-	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
-		// TODO Auto-generated method stub
+	public List<ArticoloDTO> findByCategoria(String categoria) throws AcademyException {
+		
+		log.debug("ListByAttività:" + categoria);
+
+		List<Articolo> lC = articoloRepository.findByCategoria_Nome(categoria);
+		
+		return buildListArticoloDTO(lC);
 		
 	}
 
+
 	@Override
-	public List<Articolo> findByCategoria(String categoria) throws AcademyException {
+	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	
 }

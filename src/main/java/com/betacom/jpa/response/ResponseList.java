@@ -10,7 +10,5 @@ import lombok.Setter;
 public class ResponseList<T> extends ResponseBase{
 
 	private List<T> dati;
-	
-	
-	
+
 }
