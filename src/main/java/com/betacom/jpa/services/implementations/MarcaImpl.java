@@ -2,10 +2,12 @@ package com.betacom.jpa.services.implementations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.betacom.jpa.dto.MarcaDTO;
 import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Articolo;
 import com.betacom.jpa.models.Marca;
@@ -27,6 +29,20 @@ public class MarcaImpl implements IMarcaInterfaces{
 	private IArticoloRepository articoloRepository;
 	
 	@Override
+	public List<MarcaDTO> listAll() {
+		
+	    List<Marca> lc = marcaRepository.findAll();
+
+	    return lc.stream()
+	             .map(c -> MarcaDTO.builder()
+	                     .id(c.getId())
+	                     .nome(c.getNome())
+	                     .build())
+	             .collect(Collectors.toList());
+	}
+
+	
+	@Override
 	public void createMarca(MarcaReq req) throws AcademyException {
 		
 	    log.debug("Create Marca: " + req);
@@ -43,23 +59,20 @@ public class MarcaImpl implements IMarcaInterfaces{
 	
 	@Override
 	public void updateMarca(MarcaReq req) throws AcademyException {
-		
-		log.debug("Update Marca: " + req);
-		
-		Optional<Marca> m = marcaRepository.findById(req.getId());
-		
-		if(m.isEmpty()) throw new AcademyException("Marca non trovata nel database con id: " + req.getId());
+	    
+	    log.debug("Update Marca: " + req);
 
-		Marca mar = m.get();
-		
-		if(req.getNome() != null) {
-			mar.setNome(req.getNome());
-		}
-		
-		marcaRepository.save(mar); 
-		
+	    Marca mar = marcaRepository.findById(req.getId())
+	            .orElseThrow(() -> new AcademyException("Marca non trovata nel database con id: " + req.getId()));
+
+	    if (req.getNome() != null && !req.getNome().equals(mar.getNome())) {
+	        if (marcaRepository.findByNome(req.getNome()).isPresent()) throw new AcademyException("Marca già presente nel database!");        
+	        mar.setNome(req.getNome());
+	    }
+
+	    marcaRepository.save(mar);
 	}
-	
+
 	@Override
 	public void deleteMarca(MarcaReq req) throws AcademyException {
 		
