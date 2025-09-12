@@ -21,80 +21,76 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class CategoriaImpl implements ICategoriaInterfaces{
-	
+public class CategoriaImpl implements ICategoriaInterfaces {
+
 	@Autowired
 	private ICategoriaRepository categoriaR;
-	
+
 	@Autowired
 	private IArticoloRepository articoloR;
-	
+
 	@Override
 	public void create(CategoriaReq req) throws AcademyException {
-		
+
 		Optional<Categoria> c = categoriaR.findByNome(req.getNome());
-		
-		if(c.isPresent()) {
+
+		if (c.isPresent()) {
 			throw new AcademyException("categoria gia esistente");
 		}
-		
+
 		Categoria categoria = new Categoria();
 		categoria.setNome(req.getNome());
-		
+
 		categoriaR.save(categoria);
-		
+
 	}
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void update(CategoriaReq req) throws AcademyException {
+		
 		log.debug("update :" + req);
+		
 		Optional<Categoria> c = categoriaR.findById(req.getId());
-		if (c.isEmpty())
-			throw new AcademyException("Categoria non presente in database :" + req.getId());
+		
+		if (c.isEmpty()) throw new AcademyException("Categoria non presente in database :" + req.getId());
+		
 		if (req.getNome() != null) {
-			//controllo se esiste gia una categoria con il nome inserito nell'update
-			Optional<Categoria> cat = categoriaR.findByNome(req.getNome());
-			if(cat.isPresent()) {
-				throw new AcademyException("categoria gia esistente, inserisci un altro nome");
-			}
 			
-			//se non esiste posso effettuare la modifica
+			Optional<Categoria> cat = categoriaR.findByNome(req.getNome());
+			
+			if (cat.isPresent()) throw new AcademyException("categoria gia esistente, inserisci un altro nome");
+
 			c.get().setNome(req.getNome());
 		}
-		
+
 		categoriaR.save(c.get());
 	}
-	
+
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void delete(CategoriaReq req) throws AcademyException {
-		Optional<Categoria> c = categoriaR.findById(req.getId());
-		if (c.isEmpty())
-			throw new AcademyException("categoria non presente in database");
+		
+		Optional<Categoria> c = categoriaR.findByNome(req.getNome());
+		
+		if (c.isEmpty()) throw new AcademyException("categoria non presente in database");
 
 		List<Articolo> articoliCategoria = articoloR.findByCategoria_Nome(req.getNome());
 
-		if (articoliCategoria.size() > 0)
-			throw new AcademyException("Categoria presente per articolo");
-		
+		if (articoliCategoria.size() > 0) throw new AcademyException("Categoria presente per articolo");
+
 		categoriaR.delete(c.get());
 
 	}
 
 	@Override
 	public List<CategoriaDTO> listAll() {
-		// TODO Auto-generated method stub
+
 		log.debug("List");
+
 		List<Categoria> categorie = categoriaR.findAll();
-		return categorie.stream()
-	             .map(c -> CategoriaDTO.builder()
-	                     .id(c.getId())
-	                     .nome(c.getNome())
-	                     .build())
-	             .collect(Collectors.toList());
+		return categorie.stream().map(c -> CategoriaDTO.builder().id(c.getId()).nome(c.getNome()).build())
+				.collect(Collectors.toList());
 	}
 
-	
-	
 }

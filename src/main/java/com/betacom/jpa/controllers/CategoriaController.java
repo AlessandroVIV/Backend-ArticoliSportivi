@@ -1,6 +1,7 @@
 package com.betacom.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,7 +61,7 @@ public class CategoriaController {
 		return r;
 	}
 	
-	@PostMapping("/delete")
+	@DeleteMapping("/delete")
 	public ResponseBase delete(@RequestBody (required = true)  CategoriaReq req) {
 		ResponseBase r = new ResponseBase();
 		try {
