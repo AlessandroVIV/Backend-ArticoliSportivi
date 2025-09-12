@@ -9,6 +9,6 @@ import com.betacom.jpa.models.Genere;
 
 public interface IGenereRepository extends JpaRepository<Genere, Integer>{
 
-	Optional<Genere> findByGenere(String genere) throws AcademyException;
+	Optional<Genere> findByNome(String nome) throws AcademyException;
 	
 }

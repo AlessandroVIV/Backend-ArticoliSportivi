@@ -11,5 +11,5 @@ import lombok.ToString;
 public class GenereReq {
 
 	private Integer id;
-	private String genere;
+	private String nome;
 }

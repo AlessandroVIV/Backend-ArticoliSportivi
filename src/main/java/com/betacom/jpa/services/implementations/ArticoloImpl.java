@@ -55,7 +55,7 @@ public class ArticoloImpl implements IArticoloInterfaces{
 	    
 	    art.setDescrizione(req.getDescrizione());
 	    
-	    Optional<Genere> gen = genereRepository.findByGenere(req.getGenere());
+	    Optional<Genere> gen = genereRepository.findByNome(req.getGenere());
 	    if(gen.isEmpty()) throw new AcademyException("Genere non trovato");	    
 	    art.setGenere(gen.get());
 
