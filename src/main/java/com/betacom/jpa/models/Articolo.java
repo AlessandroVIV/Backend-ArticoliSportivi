@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,6 +42,8 @@ public class Articolo {
     
     //private Integer bestSeller;
 
+    @Min(30)
+    @Max(50)
     private Integer tagliaScarpe;
     
     private String tagliaIndumento;

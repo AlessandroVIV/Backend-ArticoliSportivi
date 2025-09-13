@@ -31,4 +31,6 @@
 
     drop table if exists marca cascade;
 
+    drop table if exists taglia_indumento cascade;
+
     drop table if exists utenti cascade;

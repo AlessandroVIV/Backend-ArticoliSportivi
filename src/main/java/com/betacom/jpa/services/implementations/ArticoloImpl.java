@@ -2,6 +2,7 @@ package com.betacom.jpa.services.implementations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,7 +87,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
-		// TODO Auto-generated method stub
 		log.debug("Create Scarpa: " + req);
 
 	    Articolo art = new Articolo();
@@ -118,7 +118,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public List<ArticoloDTO> findByGenere(String genere) throws AcademyException {
-		// TODO Auto-generated method stub
 		log.debug("ListByGenere:" + genere);
 
 		List<Articolo> lC = articoloRepository.findByGenere_Nome(genere);
@@ -129,12 +128,33 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public List<ArticoloDTO> findByMarca(String marca) throws AcademyException {
-		// TODO Auto-generated method stub
 		log.debug("ListByMarca:" + marca);
 
 		List<Articolo> lC = articoloRepository.findByMarca_Nome(marca);
 		
 		return buildListArticoloDTO(lC);
 	}
+
+	@Override
+	public List<ArticoloDTO> listAll() {
+	    List<Articolo> articoli = articoloRepository.findAll();
+
+	    return articoli.stream()
+	            .map(a -> ArticoloDTO.builder()
+	                    .id(a.getId())
+	                    .nomeArticolo(a.getNome())                   
+	                    .descrizione(a.getDescrizione())
+	                    .prezzo(a.getPrezzo())
+	                    .tagliaScarpe(a.getTagliaScarpe())
+	                    .tagliaIndumento(a.getTagliaIndumento())
+	                    .marca(a.getMarca().getNome())               
+	                    .categoria(a.getCategoria().getNome())       
+	                    .genere(a.getGenere().getNome())             
+	                    .build()
+	            )
+	            .collect(Collectors.toList());
+	}
+
+
 	
 }

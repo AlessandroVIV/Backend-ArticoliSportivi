@@ -16,4 +16,6 @@ public interface IArticoloInterfaces {
 	List<ArticoloDTO> findByGenere(String genere) throws AcademyException;
 	List<ArticoloDTO> findByMarca(String nome) throws AcademyException;
 	
+	List<ArticoloDTO> listAll();
+	
 }

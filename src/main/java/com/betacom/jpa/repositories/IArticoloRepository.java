@@ -15,6 +15,7 @@ public interface IArticoloRepository extends JpaRepository<Articolo, Integer>{
 	List<Articolo> findByMarca_Nome(String nome) throws AcademyException;
 	List<Articolo> findByCategoria_Nome(String nome) throws AcademyException;
 	List<Articolo> findByGenere_Nome(String nome) throws AcademyException;
+	List<Articolo> findByTagliaIndumento(String nome) throws AcademyException;
 
 	
 }
