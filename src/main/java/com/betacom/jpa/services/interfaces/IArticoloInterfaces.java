@@ -13,6 +13,7 @@ public interface IArticoloInterfaces {
 	void createIndumento (ArticoloIndumentoReq req) throws AcademyException;
 	
 	List<ArticoloDTO> findByCategoria(String categoria) throws AcademyException;
-	
+	List<ArticoloDTO> findByGenere(String genere) throws AcademyException;
+	List<ArticoloDTO> findByMarca(String nome) throws AcademyException;
 	
 }

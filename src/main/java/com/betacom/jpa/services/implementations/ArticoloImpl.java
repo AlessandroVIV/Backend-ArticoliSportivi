@@ -89,5 +89,27 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public List<ArticoloDTO> findByGenere(String genere) throws AcademyException {
+		// TODO Auto-generated method stub
+		log.debug("ListByGenere:" + genere);
+
+		List<Articolo> lC = articoloRepository.findByGenere_Nome(genere);
+		
+		return buildListArticoloDTO(lC);
+	}
+
+
+	@Override
+	public List<ArticoloDTO> findByMarca(String marca) throws AcademyException {
+		// TODO Auto-generated method stub
+		log.debug("ListByMarca:" + marca);
+
+		List<Articolo> lC = articoloRepository.findByMarca_Nome(marca);
+		
+		return buildListArticoloDTO(lC);
+	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.jpa.dto.ArticoloDTO;
+import com.betacom.jpa.dto.GenereDTO;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
@@ -39,7 +40,7 @@ public class ArticoloController {
 		return responseBase;
 	}
 	
-	@GetMapping("/{categoria}")
+	@GetMapping("/categoria/{categoria}")
 	public ResponseList<ArticoloDTO> getByCategoria(@RequestParam String nome) {
 		
 	    ResponseList<ArticoloDTO> r = new ResponseList<ArticoloDTO>();
@@ -55,5 +56,36 @@ public class ArticoloController {
 	    return r;
 	}
 
+	@GetMapping("/genere/{genere}")
+	public ResponseList<ArticoloDTO> getByGenere(@RequestParam String nome) {
+		
+	    ResponseList<ArticoloDTO> r = new ResponseList<ArticoloDTO>();
+	    
+	    try {
+	        r.setDati(articoloInterfaces.findByGenere(nome));
+	        r.setRc(true);
+	    } catch (Exception e) {
+	        r.setRc(false);
+	        r.setMsg(e.getMessage());
+	    }
+	    
+	    return r;
+	}
+	
+	@GetMapping("/marca/{marca}")
+	public ResponseList<ArticoloDTO> getByMarca(@RequestParam String nome) {
+		
+	    ResponseList<ArticoloDTO> r = new ResponseList<ArticoloDTO>();
+	    
+	    try {
+	        r.setDati(articoloInterfaces.findByMarca(nome));
+	        r.setRc(true);
+	    } catch (Exception e) {
+	        r.setRc(false);
+	        r.setMsg(e.getMessage());
+	    }
+	    
+	    return r;
+	}
 	
 }
