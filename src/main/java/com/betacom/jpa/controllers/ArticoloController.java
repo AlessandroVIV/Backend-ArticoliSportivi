@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.jpa.dto.ArticoloDTO;
 import com.betacom.jpa.dto.GenereDTO;
+import com.betacom.jpa.requests.ArticoloIndumentoReq;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
@@ -32,6 +33,19 @@ public class ArticoloController {
 		ResponseBase responseBase = new ResponseBase();
 		try {
 			articoloInterfaces.createScarpa(req);
+			responseBase.setRc(true);
+		} catch (Exception e) {
+			responseBase.setRc(false);
+			responseBase.setMsg(e.getMessage());
+		}
+		return responseBase;
+	}
+	
+	@PostMapping("/createIndumento")
+	public ResponseBase createIndumento(@RequestBody(required = true) ArticoloIndumentoReq req) {
+		ResponseBase responseBase = new ResponseBase();
+		try {
+			articoloInterfaces.createIndumento(req);
 			responseBase.setRc(true);
 		} catch (Exception e) {
 			responseBase.setRc(false);

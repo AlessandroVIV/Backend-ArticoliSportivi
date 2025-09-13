@@ -87,7 +87,32 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	@Override
 	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
 		// TODO Auto-generated method stub
-		
+		log.debug("Create Scarpa: " + req);
+
+	    Articolo art = new Articolo();
+	    
+	    if(articoloRepository.findByNome(req.getNomeArticolo()).isPresent()) throw new AcademyException("Articolo già presente nel database!");
+	    art.setNome(req.getNomeArticolo());
+
+	    Optional<Categoria> cat = categoriaRepository.findByNome(req.getCategoria());	    
+	    if(cat.isEmpty()) throw new AcademyException("Categoria non trovata");    	
+	    art.setCategoria(cat.get());
+	    
+	    art.setTagliaIndumento(req.getTagliaIndumento());
+	    
+	    art.setDescrizione(req.getDescrizione());
+	    
+	    Optional<Genere> gen = genereRepository.findByNome(req.getGenere());
+	    if(gen.isEmpty()) throw new AcademyException("Genere non trovato");	    
+	    art.setGenere(gen.get());
+
+	    Optional<Marca> mar = marcaRepository.findByNome(req.getMarca());
+	    if(mar.isEmpty()) throw new AcademyException("Marca non trovata");
+	    art.setMarca(mar.get());
+	    
+	    art.setPrezzo(req.getPrezzo());
+	    
+	    articoloRepository.save(art);
 	}
 
 
