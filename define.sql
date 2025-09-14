@@ -9,6 +9,7 @@
         descrizione varchar(255),
         nome varchar(255),
         taglia_indumento varchar(255),
+        url_immagine varchar(255),
         primary key (id)
     );
 

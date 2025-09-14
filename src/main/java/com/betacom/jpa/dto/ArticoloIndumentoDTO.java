@@ -18,5 +18,6 @@ public class ArticoloIndumentoDTO {
     private String descrizione;
     private Integer bestSeller;
     private Integer tagliaIndumento;
-	
+    private String urlImmagine;
+    
 }

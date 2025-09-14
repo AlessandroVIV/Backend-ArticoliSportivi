@@ -21,5 +21,6 @@ public class ArticoloDTO {
     //private Integer bestSeller;
     private Integer tagliaScarpe;
     private String tagliaIndumento;
+    private String urlImmagine;
 	
 }

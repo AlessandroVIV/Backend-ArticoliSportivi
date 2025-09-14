@@ -18,5 +18,6 @@ public class ArticoloIndumentoReq {
     private String descrizione;
     private Integer bestSeller;
     private String tagliaIndumento;
+    private String urlImmagine;
     
 }
