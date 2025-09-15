@@ -1,40 +1,36 @@
 package com.betacom.jpa.models;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "carrello_item")
+@Table(name = "ordini")
 @Getter
 @Setter
-public class CarrelloItem {
+public class Ordini {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "carrello_id", nullable = false)
-    private Carrello carrello;
-    
-    @ManyToOne
-    @JoinColumn(name = "articolo_id", nullable = false)
-    private Articolo articolo;
-    
-    @ManyToOne
-    @JoinColumn(name = "ordine_id")
-    private Ordini ordine;
+    @JoinColumn(name = "utente_id", nullable = false)
+    private Utente utente;
 
+    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
+    private List<CarrelloItem> items;
 
-    private Integer quantita;
-    
-    private Double prezzoTotale;
-
+    private LocalDateTime dataOrdine;
 }

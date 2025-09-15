@@ -49,5 +49,6 @@ public class Articolo {
     private String tagliaIndumento;
     
     private String urlImmagine;
+    
 
 }

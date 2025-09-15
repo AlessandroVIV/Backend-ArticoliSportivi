@@ -19,6 +19,12 @@
     alter table if exists carrello_item 
        drop constraint if exists FK2uy8v67ws6bc0qctdgrhg011d;
 
+    alter table if exists carrello_item 
+       drop constraint if exists FKp9hrx8i337h65th1unxb95ci0;
+
+    alter table if exists ordini 
+       drop constraint if exists FK2pcp5659dvokfq4iayu4uxne2;
+
     drop table if exists articoli cascade;
 
     drop table if exists carrello cascade;
@@ -30,6 +36,8 @@
     drop table if exists genere cascade;
 
     drop table if exists marca cascade;
+
+    drop table if exists ordini cascade;
 
     drop table if exists taglia_indumento cascade;
 
