@@ -1,0 +1,50 @@
+package com.betacom.jpa.services.implementations;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.betacom.jpa.exception.AcademyException;
+import com.betacom.jpa.models.Carrello;
+import com.betacom.jpa.models.Utente;
+import com.betacom.jpa.repositories.IUtenteRepository;
+import com.betacom.jpa.requests.UtenteReq;
+import com.betacom.jpa.services.interfaces.IUtenteInterfaces;
+
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
+@Service
+public class UtenteImpl implements IUtenteInterfaces{
+	
+	@Autowired
+	IUtenteRepository utenteRepository;
+	
+	@Override
+	public Utente createUtente(UtenteReq req) throws AcademyException {
+
+		log.debug("Create Utente: " + req);
+		
+        if (utenteRepository.findByUsername(req.getUsername()).isPresent()) {
+            throw new AcademyException("Username già registrato!");
+        }
+        
+        Utente utente = new Utente();
+        utente.setNome(req.getNome());
+        utente.setCognome(req.getCognome());
+        utente.setUsername(req.getUsername());
+        utente.setPassword(req.getPassword()); 
+        utente.setEmail(req.getEmail());
+        utente.setRole(req.getRole());
+		
+        Carrello carrello = new Carrello();
+		
+        utente.setCarrello(carrello);
+        carrello.setUtente(utente);
+	
+		return utenteRepository.save(utente);
+		
+	}
+
+	
+	
+}

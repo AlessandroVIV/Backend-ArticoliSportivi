@@ -1,13 +1,17 @@
 package com.betacom.jpa.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class UtenteDTO {
 
@@ -15,7 +19,5 @@ public class UtenteDTO {
 	private String nome;
 	private String cognome;
 	private String username;
-	private String password;
-	private String email;
-	private CarrelloDTO carrello;
+	
 }

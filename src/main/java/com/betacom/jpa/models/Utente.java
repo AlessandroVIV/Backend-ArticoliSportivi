@@ -1,6 +1,7 @@
 package com.betacom.jpa.models;
 
 import com.betacom.jpa.utility.Roles;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -31,6 +32,7 @@ public class Utente {
 	private String email;
 	
     @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Carrello carrello;
 
 	@Enumerated(EnumType.STRING)

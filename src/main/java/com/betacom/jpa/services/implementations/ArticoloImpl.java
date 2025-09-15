@@ -87,6 +87,7 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
+		
 		log.debug("Create Scarpa: " + req);
 
 	    Articolo art = new Articolo();
@@ -118,6 +119,7 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public List<ArticoloDTO> findByGenere(String genere) throws AcademyException {
+		
 		log.debug("ListByGenere:" + genere);
 
 		List<Articolo> lC = articoloRepository.findByGenere_Nome(genere);
@@ -128,6 +130,7 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public List<ArticoloDTO> findByMarca(String marca) throws AcademyException {
+		
 		log.debug("ListByMarca:" + marca);
 
 		List<Articolo> lC = articoloRepository.findByMarca_Nome(marca);
@@ -155,6 +158,4 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	            .collect(Collectors.toList());
 	}
 
-
-	
 }

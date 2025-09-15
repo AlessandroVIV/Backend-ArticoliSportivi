@@ -7,8 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class GenereReq {
+public class CarrelloItemReq {
 
-	private Integer id;
-	private String nome;
+	private Integer articoloId;
+	private Integer quantita;
+	
 }

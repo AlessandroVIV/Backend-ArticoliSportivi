@@ -2,6 +2,8 @@ package com.betacom.jpa.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,6 +29,7 @@ public class Carrello {
 
     @OneToOne
     @JoinColumn(name = "utente_id", nullable = false, unique = true)
+    @JsonIgnore
     private Utente utente;
     
     @OneToMany(mappedBy = "carrello", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
