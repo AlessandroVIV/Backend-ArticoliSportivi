@@ -71,8 +71,6 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
             utenteDTO.setNome(utente.getNome());
             utenteDTO.setCognome(utente.getCognome());
             utenteDTO.setUsername(utente.getUsername());
-            //utenteDTO.setPassword(utente.getPassword());
-            carrelloDTO.setUtente(utenteDTO);
         }
 
         dto.setCarrello(carrelloDTO);

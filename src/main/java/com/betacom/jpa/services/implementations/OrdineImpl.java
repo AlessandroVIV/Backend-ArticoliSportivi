@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.betacom.jpa.dto.CarrelloDTO;
 import com.betacom.jpa.dto.CarrelloItemDTO;
 import com.betacom.jpa.dto.OrdineDTO;
 import com.betacom.jpa.dto.UtenteDTO;
@@ -76,6 +77,8 @@ public class OrdineImpl implements IOrdineInterfaces{
 
 	    UtenteDTO utenteDTO = new UtenteDTO();
 	    utenteDTO.setId(ordine.getUtente().getId());
+	    utenteDTO.setNome(ordine.getUtente().getNome());
+	    utenteDTO.setCognome(ordine.getUtente().getCognome());
 	    utenteDTO.setUsername(ordine.getUtente().getUsername());
 	    dto.setUtente(utenteDTO);
 
@@ -84,9 +87,19 @@ public class OrdineImpl implements IOrdineInterfaces{
 	        itemDTO.setId(item.getId());
 	        itemDTO.setQuantita(item.getQuantita());
 	        itemDTO.setPrezzoTotale(item.getPrezzoTotale());
-	        itemDTO.setArticolo(item.getArticolo()); 
+	        itemDTO.setArticolo(item.getArticolo());
+
+	        if (item.getCarrello() != null) {
+	            CarrelloDTO carrelloDTO = new CarrelloDTO();
+	            carrelloDTO.setId(item.getCarrello().getId());
+	            itemDTO.setCarrello(carrelloDTO);
+	        }
+
 	        return itemDTO;
+	        
 	    }).toList();
+
+	    
 	    dto.setItems(itemsDTO);
 
 	    return dto;
@@ -95,7 +108,7 @@ public class OrdineImpl implements IOrdineInterfaces{
 	@Override
 	public OrdineDTO listById(Integer id) throws AcademyException {
 	    Ordini ordine = ordineRepository.findById(id)
-	            .orElseThrow(() -> new AcademyException("Ordine con id " + id + " non trovato"));
+	            .orElseThrow(() -> new AcademyException("Ordine con id " + id + " non trovato!"));
 	    return toDTO(ordine);
 	}
 

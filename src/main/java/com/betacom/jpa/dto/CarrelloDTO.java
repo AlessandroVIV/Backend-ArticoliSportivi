@@ -10,6 +10,6 @@ import lombok.ToString;
 public class CarrelloDTO {
 
 	private Integer id;
-    private UtenteDTO utente;
+    //private UtenteDTO utente;
     
 }
