@@ -52,6 +52,23 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
 
         return toDTO(saved); 
     }
+    
+    @Override
+    public void rimuoviItem(Integer utenteId, Integer carrelloItemId) {
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+
+        Carrello carrello = utente.getCarrello();
+
+        CarrelloItem item = carrelloItemRepository.findById(carrelloItemId)
+                .orElseThrow(() -> new RuntimeException("Item non trovato"));
+
+        if (!item.getCarrello().getId().equals(carrello.getId())) {
+            throw new RuntimeException("Item non appartiene a questo utente");
+        }
+
+        carrelloItemRepository.delete(item);
+    }
 
     private CarrelloItemDTO toDTO(CarrelloItem item) {
     	
@@ -77,6 +94,68 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
         dto.setArticolo(item.getArticolo()); 
 
         return dto;
+    }
+
+    @Override
+    public CarrelloItemDTO aggiornaQuantita(Integer utenteId, Integer itemId, Integer Quantita) {
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+
+        Carrello carrello = utente.getCarrello();
+
+        CarrelloItem item = carrelloItemRepository.findByIdAndCarrelloId(itemId, carrello.getId())
+                .orElseThrow(() -> new RuntimeException("Item non trovato nel carrello di questo utente"));
+
+        if (Quantita <= 0) {
+            carrelloItemRepository.delete(item);
+            return null;
+        }
+
+        item.setQuantita(Quantita);
+        item.setPrezzoTotale(item.getArticolo().getPrezzo() * Quantita);
+
+        CarrelloItem updated = carrelloItemRepository.save(item);
+        return toDTO(updated);
+    }
+
+    @Override
+    public CarrelloItemDTO aumentaQuantitaSingola(Integer utenteId, Integer itemId) {
+        
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+
+        Carrello carrello = utente.getCarrello();
+
+        CarrelloItem item = carrelloItemRepository.findByIdAndCarrelloId(itemId, carrello.getId())
+                .orElseThrow(() -> new RuntimeException("Item non trovato nel carrello di questo utente"));
+
+        int nuovaQuantita = item.getQuantita() + 1;
+        item.setQuantita(nuovaQuantita);
+
+        item.setPrezzoTotale(item.getArticolo().getPrezzo() * nuovaQuantita);
+
+        CarrelloItem updated = carrelloItemRepository.save(item);
+        return toDTO(updated);
+    }
+
+    @Override
+    public CarrelloItemDTO diminuisciQuantitaSingola(Integer utenteId, Integer itemId) {
+    	
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+
+        Carrello carrello = utente.getCarrello();
+
+        CarrelloItem item = carrelloItemRepository.findByIdAndCarrelloId(itemId, carrello.getId())
+                .orElseThrow(() -> new RuntimeException("Item non trovato nel carrello di questo utente"));
+
+        int nuovaQuantita = item.getQuantita() - 1;
+        item.setQuantita(nuovaQuantita);
+
+        item.setPrezzoTotale(item.getArticolo().getPrezzo() * nuovaQuantita);
+
+        CarrelloItem updated = carrelloItemRepository.save(item);
+        return toDTO(updated);
     }
 
 }
