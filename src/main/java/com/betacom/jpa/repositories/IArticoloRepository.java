@@ -11,6 +11,7 @@ import com.betacom.jpa.models.Articolo;
 public interface IArticoloRepository extends JpaRepository<Articolo, Integer>{
 
 	Optional<Articolo> findByNome(String nome) throws AcademyException;
+	Optional<Articolo> findById(Long id) throws AcademyException;
 	
 	List<Articolo> findByMarca_Nome(String nome) throws AcademyException;
 	List<Articolo> findByCategoria_Nome(String nome) throws AcademyException;

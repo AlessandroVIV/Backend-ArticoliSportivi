@@ -68,6 +68,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	    
 	    art.setPrezzo(req.getPrezzo());
 	    
+	    art.setUrlImmagine(req.getUrlImmagine());
+	    
 	    articoloRepository.save(art);
 	    
 	}
@@ -113,6 +115,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	    
 	    art.setPrezzo(req.getPrezzo());
 	    
+	    art.setUrlImmagine(req.getUrlImmagine());
+	    
 	    articoloRepository.save(art);
 	}
 
@@ -152,7 +156,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	                    .tagliaIndumento(a.getTagliaIndumento())
 	                    .marca(a.getMarca().getNome())               
 	                    .categoria(a.getCategoria().getNome())       
-	                    .genere(a.getGenere().getNome())             
+	                    .genere(a.getGenere().getNome())  
+	                    .urlImmagine(a.getUrlImmagine())
 	                    .build()
 	            )
 	            .collect(Collectors.toList());

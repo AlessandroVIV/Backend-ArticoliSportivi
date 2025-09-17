@@ -3,6 +3,7 @@ package com.betacom.jpa.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.jpa.dto.ArticoloDTO;
+import com.betacom.jpa.exception.AcademyException;
+import com.betacom.jpa.models.Articolo;
+import com.betacom.jpa.repositories.IArticoloRepository;
 import com.betacom.jpa.requests.ArticoloIndumentoReq;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.response.ResponseBase;
@@ -24,6 +28,9 @@ public class ArticoloController {
 	@Autowired
 	private IArticoloInterfaces articoloInterfaces;
 	
+	@Autowired
+	private IArticoloRepository articoloRepository;
+	
 	@GetMapping("/listAll")
 	public ResponseList<ArticoloDTO> listAll() {
 	    ResponseList<ArticoloDTO> r = new ResponseList<ArticoloDTO>();
@@ -36,6 +43,11 @@ public class ArticoloController {
 	    }
 	    return r;
 	}
+	
+	@GetMapping("/{id}")
+    public Articolo getArticolo(@PathVariable Long id) throws AcademyException {
+        return articoloRepository.findById(id).orElse(null);
+    }
 	
 	@PostMapping("/createScarpa")
 	public ResponseBase create(@RequestBody(required = true) ArticoloScarpaReq req) {
