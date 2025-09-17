@@ -1,6 +1,7 @@
 package com.betacom.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.betacom.jpa.dto.LoginDTO;
 import com.betacom.jpa.dto.UtenteDTO;
+import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
 import com.betacom.jpa.services.interfaces.IUtenteInterfaces;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/rest/utente")
 public class UtenteController {
@@ -72,6 +76,11 @@ public class UtenteController {
 			responseBase.setMsg(e.getMessage());
 		}
 		return responseBase;
+	}
+	
+	@PostMapping("/login")
+	public LoginDTO signIn(@RequestBody (required = true) LoginReq req) {
+		return utenteInterfaces.login(req);
 	}
 	
 }

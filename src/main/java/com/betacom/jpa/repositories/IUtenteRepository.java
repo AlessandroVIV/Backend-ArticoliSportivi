@@ -9,5 +9,6 @@ import com.betacom.jpa.models.Utente;
 public interface IUtenteRepository extends JpaRepository<Utente, Integer>{
 
 	Optional<Utente> findByUsername(String username);
+	Optional<Utente> findByUsernameAndPassword(String userName,String pwd);
 
 }

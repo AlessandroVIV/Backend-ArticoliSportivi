@@ -1,16 +1,19 @@
 package com.betacom.jpa.services.implementations;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.betacom.jpa.dto.LoginDTO;
 import com.betacom.jpa.dto.UtenteDTO;
 import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Carrello;
 import com.betacom.jpa.models.Utente;
 import com.betacom.jpa.repositories.IUtenteRepository;
+import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
 import com.betacom.jpa.services.interfaces.IUtenteInterfaces;
 
@@ -97,6 +100,22 @@ public class UtenteImpl implements IUtenteInterfaces{
 
 	    return utente; 
 	    
+	}
+
+	@Override
+	public LoginDTO login(LoginReq req) {
+				log.debug("login :" + req);
+				
+				LoginDTO r = new LoginDTO();
+				Optional<Utente> u = utenteRepository.findByUsernameAndPassword(req.getUser(), req.getPassword());
+				if(u.isEmpty()) {
+					r.setLogged(false);
+				}else {
+					r.setId(u.get().getId());
+					r.setLogged(true);
+					r.setRole(u.get().getRole().toString());
+				}
+				return r;
 	}
 
 }

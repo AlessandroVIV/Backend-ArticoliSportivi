@@ -2,9 +2,11 @@ package com.betacom.jpa.services.interfaces;
 
 import java.util.List;
 
+import com.betacom.jpa.dto.LoginDTO;
 import com.betacom.jpa.dto.UtenteDTO;
 import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Utente;
+import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
 
 public interface IUtenteInterfaces {
@@ -16,5 +18,7 @@ public interface IUtenteInterfaces {
 	Utente deleteUtente(UtenteReq req) throws AcademyException;
 	
 	List<UtenteDTO> listAll();
+	
+	LoginDTO login(LoginReq req);
 	
 }
