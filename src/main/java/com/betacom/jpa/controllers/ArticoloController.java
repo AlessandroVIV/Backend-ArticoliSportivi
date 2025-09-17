@@ -46,10 +46,11 @@ public class ArticoloController {
 	    return r;
 	}
 	
-	@GetMapping("/{id}")
-    public Articolo getArticolo(@PathVariable Long id) throws AcademyException {
-        return articoloRepository.findById(id).orElse(null);
-    }
+	@GetMapping("/getArticolo")
+	public Articolo getArticolo(@RequestParam Long id) throws AcademyException {
+	    return articoloRepository.findById(id).orElse(null);
+	}
+
 	
 	@PostMapping("/createScarpa")
 	public ResponseBase create(@RequestBody(required = true) ArticoloScarpaReq req) {

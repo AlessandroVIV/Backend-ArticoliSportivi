@@ -2,6 +2,7 @@ package com.betacom.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import com.betacom.jpa.requests.OrdineRequest;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
 import com.betacom.jpa.services.interfaces.IOrdineInterfaces;
+
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/rest/ordine")

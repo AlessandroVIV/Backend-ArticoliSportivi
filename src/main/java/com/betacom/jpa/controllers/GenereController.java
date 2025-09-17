@@ -1,6 +1,7 @@
 package com.betacom.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import com.betacom.jpa.requests.GenereReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
 import com.betacom.jpa.services.interfaces.IGenereInterfaces;
+
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/rest/genere")
