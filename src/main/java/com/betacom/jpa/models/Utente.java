@@ -1,5 +1,7 @@
 package com.betacom.jpa.models;
 
+import java.util.List;
+
 import com.betacom.jpa.utility.Roles;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -10,6 +12,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -34,6 +37,9 @@ public class Utente {
     @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Carrello carrello;
+    
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ordini> ordini;
 
 	@Enumerated(EnumType.STRING)
 	private Roles role;
