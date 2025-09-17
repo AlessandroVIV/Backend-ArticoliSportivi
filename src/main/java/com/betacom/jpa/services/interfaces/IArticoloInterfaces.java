@@ -11,10 +11,16 @@ public interface IArticoloInterfaces {
 
 	void createScarpa (ArticoloScarpaReq req) throws AcademyException;
 	void createIndumento (ArticoloIndumentoReq req) throws AcademyException;
+	void updateScarpa (ArticoloScarpaReq req) throws AcademyException;
+	void updateIndumento (ArticoloIndumentoReq req) throws AcademyException;
+	void deleteArticolo(Integer id) throws AcademyException;
+
 	
 	List<ArticoloDTO> findByCategoria(String categoria) throws AcademyException;
 	List<ArticoloDTO> findByGenere(String genere) throws AcademyException;
 	List<ArticoloDTO> findByMarca(String nome) throws AcademyException;
+	
+	
 	
 	List<ArticoloDTO> listAll();
 	

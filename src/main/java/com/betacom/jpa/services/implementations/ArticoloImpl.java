@@ -163,4 +163,121 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	            .collect(Collectors.toList());
 	}
 
+
+	@Override
+	public void updateScarpa(ArticoloScarpaReq req) throws AcademyException {
+		 log.debug("Update Scarpa: " + req);
+
+		    Articolo art = articoloRepository.findById(req.getId())
+		            .orElseThrow(() -> new AcademyException("Articolo non trovato nel database con id: " + req.getId()));
+
+		    if (req.getCategoria() != null) {    
+		        Optional<Categoria> categoria = categoriaRepository.findByNome(req.getCategoria());
+		        if (categoria.isEmpty()) throw new AcademyException("Categoria inesistente!");  
+		        art.setCategoria(categoria.get());
+		        }
+		    
+		    if (req.getGenere() != null) {    
+		        Optional<Genere> genere = genereRepository.findByNome(req.getGenere());
+		        if (genere.isEmpty()) throw new AcademyException("Genere inesistente!");  
+		        art.setGenere(genere.get());
+		        }
+		    
+		    if (req.getMarca() != null) {    
+		        Optional<Marca> marca = marcaRepository.findByNome(req.getMarca());
+		        if (marca.isEmpty()) throw new AcademyException("Marca inesistente!");  
+		        art.setMarca(marca.get());
+		        }
+		    
+		    if (req.getDescrizione() != null) {   
+		        art.setDescrizione(req.getDescrizione());
+		        }
+		    if (req.getNomeArticolo() != null) {   
+		        art.setNome(req.getNomeArticolo());
+		        }
+		    if (req.getPrezzo() != null) {   
+		        art.setPrezzo(req.getPrezzo());
+		        }
+		    if (req.getTagliaScarpe() != null) {   
+		        art.setTagliaScarpe(req.getTagliaScarpe());
+		        }
+		    if (req.getUrlImmagine() != null) {   
+		        art.setUrlImmagine(req.getUrlImmagine());
+		        }
+		    
+		    
+		    
+
+		    articoloRepository.save(art);
+		}
+		
+	
+
+
+	@Override
+	public void updateIndumento(ArticoloIndumentoReq req) throws AcademyException {
+
+		 log.debug("Update Indumento: " + req);
+
+		    Articolo art = articoloRepository.findById(req.getId())
+		            .orElseThrow(() -> new AcademyException("Articolo non trovato nel database con id: " + req.getId()));
+
+		    if (req.getCategoria() != null) {    
+		        Optional<Categoria> categoria = categoriaRepository.findByNome(req.getCategoria());
+		        if (categoria.isEmpty()) throw new AcademyException("Categoria inesistente!");  
+		        art.setCategoria(categoria.get());
+		        }
+		    
+		    if (req.getGenere() != null) {    
+		        Optional<Genere> genere = genereRepository.findByNome(req.getGenere());
+		        if (genere.isEmpty()) throw new AcademyException("Genere inesistente!");  
+		        art.setGenere(genere.get());
+		        }
+		    
+		    if (req.getMarca() != null) {    
+		        Optional<Marca> marca = marcaRepository.findByNome(req.getMarca());
+		        if (marca.isEmpty()) throw new AcademyException("Marca inesistente!");  
+		        art.setMarca(marca.get());
+		        }
+		    
+		    
+		    if (req.getDescrizione() != null) {   
+		        art.setDescrizione(req.getDescrizione());
+		        }
+		    if (req.getNomeArticolo() != null) {   
+		        art.setNome(req.getNomeArticolo());
+		        }
+		    if (req.getPrezzo() != null) {   
+		        art.setPrezzo(req.getPrezzo());
+		        }
+		    if (req.getTagliaIndumento() != null) {   
+		        art.setTagliaIndumento(req.getTagliaIndumento());
+		        }
+		    if (req.getUrlImmagine() != null) {   
+		        art.setUrlImmagine(req.getUrlImmagine());
+		        }
+		    
+		  
+
+		    articoloRepository.save(art);
+		
+		
+	}
+
+
+	@Override
+	public void deleteArticolo(Integer id) throws AcademyException {
+		log.debug("Delete Scarpa con id: " + id);
+	    
+	    Optional<Articolo> art = articoloRepository.findById(id);
+	    
+	    if(art.isEmpty()) throw new AcademyException("Articolo non trovato nel database con id:" + id);
+
+	    articoloRepository.delete(art.get());
+		
+	}
+
+
+
+
 }

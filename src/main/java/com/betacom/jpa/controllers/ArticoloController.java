@@ -2,9 +2,11 @@ package com.betacom.jpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -122,5 +124,48 @@ public class ArticoloController {
 	    
 	    return r;
 	}
+	
+	@PutMapping("/updateScarpa")
+	public ResponseBase update(@RequestBody (required = true)  ArticoloScarpaReq req) {
+		ResponseBase r = new ResponseBase();
+		try {
+			articoloInterfaces.updateScarpa(req);
+			r.setRc(true);
+		} catch (Exception e) {
+			r.setRc(false);
+			r.setMsg(e.getMessage());
+		}
+		return r;
+	}
+	
+	@PutMapping("/updateIndumento")
+	public ResponseBase update(@RequestBody (required = true)  ArticoloIndumentoReq req) {
+		ResponseBase r = new ResponseBase();
+		try {
+			articoloInterfaces.updateIndumento(req);
+			r.setRc(true);
+		} catch (Exception e) {
+			r.setRc(false);
+			r.setMsg(e.getMessage());
+		}
+		return r;
+	}
+	
+	@DeleteMapping("/deleteArticolo")
+	public ResponseBase delete(@RequestParam(required = true) Integer id) {
+		ResponseBase responseBase = new ResponseBase();
+		try {
+			articoloInterfaces.deleteArticolo(id);
+			responseBase.setRc(true);
+		} catch (Exception e) {
+			responseBase.setRc(false);
+			responseBase.setMsg(e.getMessage());
+		}
+		return responseBase;
+	}
+	
+	
+	
+	
 	
 }
