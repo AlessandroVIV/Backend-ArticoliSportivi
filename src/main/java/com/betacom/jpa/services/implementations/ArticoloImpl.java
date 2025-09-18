@@ -47,8 +47,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	    Articolo art = new Articolo();
 	    
-	    if(articoloRepository.findByNome(req.getNomeArticolo()).isPresent()) throw new AcademyException("Articolo già presente nel database!");
-	    art.setNome(req.getNomeArticolo());
+	    if(articoloRepository.findByNome(req.getNome()).isPresent()) throw new AcademyException("Articolo già presente nel database!");
+	    art.setNome(req.getNome());
 
 	    Optional<Categoria> cat = categoriaRepository.findByNome(req.getCategoria());	    
 	    if(cat.isEmpty()) throw new AcademyException("Categoria non trovata");    	
@@ -192,8 +192,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		    if (req.getDescrizione() != null) {   
 		        art.setDescrizione(req.getDescrizione());
 		        }
-		    if (req.getNomeArticolo() != null) {   
-		        art.setNome(req.getNomeArticolo());
+		    if (req.getNome() != null) {   
+		        art.setNome(req.getNome());
 		        }
 		    if (req.getPrezzo() != null) {   
 		        art.setPrezzo(req.getPrezzo());
@@ -205,9 +205,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		        art.setUrlImmagine(req.getUrlImmagine());
 		        }
 		    
-		    
-		    
-
 		    articoloRepository.save(art);
 		}
 		
@@ -267,6 +264,7 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 
 	@Override
 	public void deleteArticolo(Integer id) throws AcademyException {
+		
 		log.debug("Delete Scarpa con id: " + id);
 	    
 	    Optional<Articolo> art = articoloRepository.findById(id);

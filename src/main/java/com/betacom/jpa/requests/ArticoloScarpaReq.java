@@ -10,7 +10,7 @@ import lombok.ToString;
 public class ArticoloScarpaReq {
 	
 	private Integer id;
-	private String nomeArticolo;
+	private String nome;
 	private String genere;
 	private String marca;
 	private String categoria;

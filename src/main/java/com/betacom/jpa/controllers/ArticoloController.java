@@ -162,9 +162,5 @@ public class ArticoloController {
 		}
 		return responseBase;
 	}
-	
-	
-	
-	
-	
+
 }
