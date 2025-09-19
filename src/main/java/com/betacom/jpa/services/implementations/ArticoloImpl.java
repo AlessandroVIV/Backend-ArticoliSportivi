@@ -74,7 +74,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	    
 	}
 
-
 	@Override
 	public List<ArticoloDTO> findByCategoria(String categoria) throws AcademyException {
 		
@@ -85,7 +84,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		return buildListArticoloDTO(lC);
 		
 	}
-
 
 	@Override
 	public void createIndumento(ArticoloIndumentoReq req) throws AcademyException {
@@ -120,7 +118,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	    articoloRepository.save(art);
 	}
 
-
 	@Override
 	public List<ArticoloDTO> findByGenere(String genere) throws AcademyException {
 		
@@ -130,7 +127,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		
 		return buildListArticoloDTO(lC);
 	}
-
 
 	@Override
 	public List<ArticoloDTO> findByMarca(String marca) throws AcademyException {
@@ -208,8 +204,6 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		    articoloRepository.save(art);
 		}
 		
-	
-
 
 	@Override
 	public void updateIndumento(ArticoloIndumentoReq req) throws AcademyException {
@@ -253,11 +247,8 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 		    if (req.getUrlImmagine() != null) {   
 		        art.setUrlImmagine(req.getUrlImmagine());
 		        }
-		    
-		  
 
 		    articoloRepository.save(art);
-		
 		
 	}
 
@@ -274,8 +265,5 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	    articoloRepository.delete(art.get());
 		
 	}
-
-
-
 
 }
