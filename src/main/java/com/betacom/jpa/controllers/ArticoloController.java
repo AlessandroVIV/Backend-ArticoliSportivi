@@ -16,6 +16,7 @@ import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Articolo;
 import com.betacom.jpa.repositories.IArticoloRepository;
 import com.betacom.jpa.requests.ArticoloIndumentoReq;
+import com.betacom.jpa.requests.ArticoloReq;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
@@ -124,11 +125,11 @@ public class ArticoloController {
 	    return r;
 	}
 	
-	@PutMapping("/updateScarpa")
-	public ResponseBase update(@RequestBody (required = true)  ArticoloScarpaReq req) {
+	@PutMapping("/updateArticolo")
+	public ResponseBase update(@RequestBody (required = true)  ArticoloReq req) {
 		ResponseBase r = new ResponseBase();
 		try {
-			articoloInterfaces.updateScarpa(req);
+			articoloInterfaces.updateArticolo(req);
 			r.setRc(true);
 		} catch (Exception e) {
 			r.setRc(false);
@@ -137,18 +138,7 @@ public class ArticoloController {
 		return r;
 	}
 	
-	@PutMapping("/updateIndumento")
-	public ResponseBase update(@RequestBody (required = true)  ArticoloIndumentoReq req) {
-		ResponseBase r = new ResponseBase();
-		try {
-			articoloInterfaces.updateIndumento(req);
-			r.setRc(true);
-		} catch (Exception e) {
-			r.setRc(false);
-			r.setMsg(e.getMessage());
-		}
-		return r;
-	}
+	
 	
 	@DeleteMapping("/deleteArticolo")
 	public ResponseBase delete(@RequestParam(required = true) Integer id) {

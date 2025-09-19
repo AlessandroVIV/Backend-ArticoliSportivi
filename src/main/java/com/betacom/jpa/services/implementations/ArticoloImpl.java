@@ -18,6 +18,7 @@ import com.betacom.jpa.repositories.ICategoriaRepository;
 import com.betacom.jpa.repositories.IGenereRepository;
 import com.betacom.jpa.repositories.IMarcaRepository;
 import com.betacom.jpa.requests.ArticoloIndumentoReq;
+import com.betacom.jpa.requests.ArticoloReq;
 import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.services.interfaces.IArticoloInterfaces;
 import com.betacom.jpa.utility.Builders;
@@ -160,96 +161,49 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	}
 
 
-	@Override
-	public void updateScarpa(ArticoloScarpaReq req) throws AcademyException {
-		 log.debug("Update Scarpa: " + req);
-
-		    Articolo art = articoloRepository.findById(req.getId())
-		            .orElseThrow(() -> new AcademyException("Articolo non trovato nel database con id: " + req.getId()));
-
-		    if (req.getCategoria() != null) {    
-		        Optional<Categoria> categoria = categoriaRepository.findByNome(req.getCategoria());
-		        if (categoria.isEmpty()) throw new AcademyException("Categoria inesistente!");  
-		        art.setCategoria(categoria.get());
-		        }
-		    
-		    if (req.getGenere() != null) {    
-		        Optional<Genere> genere = genereRepository.findByNome(req.getGenere());
-		        if (genere.isEmpty()) throw new AcademyException("Genere inesistente!");  
-		        art.setGenere(genere.get());
-		        }
-		    
-		    if (req.getMarca() != null) {    
-		        Optional<Marca> marca = marcaRepository.findByNome(req.getMarca());
-		        if (marca.isEmpty()) throw new AcademyException("Marca inesistente!");  
-		        art.setMarca(marca.get());
-		        }
-		    
-		    if (req.getDescrizione() != null) {   
-		        art.setDescrizione(req.getDescrizione());
-		        }
-		    if (req.getNome() != null) {   
-		        art.setNome(req.getNome());
-		        }
-		    if (req.getPrezzo() != null) {   
-		        art.setPrezzo(req.getPrezzo());
-		        }
-		    if (req.getTagliaScarpe() != null) {   
-		        art.setTagliaScarpe(req.getTagliaScarpe());
-		        }
-		    if (req.getUrlImmagine() != null) {   
-		        art.setUrlImmagine(req.getUrlImmagine());
-		        }
-		    
-		    articoloRepository.save(art);
-		}
-		
+	
 
 	@Override
-	public void updateIndumento(ArticoloIndumentoReq req) throws AcademyException {
+	public void updateArticolo(ArticoloReq req) throws AcademyException {
+	    log.debug("Update Articolo: " + req);
 
-		 log.debug("Update Indumento: " + req);
+	    Articolo art = articoloRepository.findById(req.getId())
+	            .orElseThrow(() -> new AcademyException("Articolo non trovato con id: " + req.getId()));
 
-		    Articolo art = articoloRepository.findById(req.getId())
-		            .orElseThrow(() -> new AcademyException("Articolo non trovato nel database con id: " + req.getId()));
+	    if (req.getCategoria() != null) {
+	        Categoria categoria = categoriaRepository.findByNome(req.getCategoria())
+	                .orElseThrow(() -> new AcademyException("Categoria inesistente!"));
+	        art.setCategoria(categoria);
+	    }
 
-		    if (req.getCategoria() != null) {    
-		        Optional<Categoria> categoria = categoriaRepository.findByNome(req.getCategoria());
-		        if (categoria.isEmpty()) throw new AcademyException("Categoria inesistente!");  
-		        art.setCategoria(categoria.get());
-		        }
-		    
-		    if (req.getGenere() != null) {    
-		        Optional<Genere> genere = genereRepository.findByNome(req.getGenere());
-		        if (genere.isEmpty()) throw new AcademyException("Genere inesistente!");  
-		        art.setGenere(genere.get());
-		        }
-		    
-		    if (req.getMarca() != null) {    
-		        Optional<Marca> marca = marcaRepository.findByNome(req.getMarca());
-		        if (marca.isEmpty()) throw new AcademyException("Marca inesistente!");  
-		        art.setMarca(marca.get());
-		        }
-		    
-		    
-		    if (req.getDescrizione() != null) {   
-		        art.setDescrizione(req.getDescrizione());
-		        }
-		    if (req.getNomeArticolo() != null) {   
-		        art.setNome(req.getNomeArticolo());
-		        }
-		    if (req.getPrezzo() != null) {   
-		        art.setPrezzo(req.getPrezzo());
-		        }
-		    if (req.getTagliaIndumento() != null) {   
-		        art.setTagliaIndumento(req.getTagliaIndumento());
-		        }
-		    if (req.getUrlImmagine() != null) {   
-		        art.setUrlImmagine(req.getUrlImmagine());
-		        }
+	    if (req.getGenere() != null) {
+	        Genere genere = genereRepository.findByNome(req.getGenere())
+	                .orElseThrow(() -> new AcademyException("Genere inesistente!"));
+	        art.setGenere(genere);
+	    }
 
-		    articoloRepository.save(art);
-		
+	    if (req.getMarca() != null) {
+	        Marca marca = marcaRepository.findByNome(req.getMarca())
+	                .orElseThrow(() -> new AcademyException("Marca inesistente!"));
+	        art.setMarca(marca);
+	    }
+
+	    if (req.getDescrizione() != null) art.setDescrizione(req.getDescrizione());
+	    if (req.getNome() != null) art.setNome(req.getNome());
+	    if (req.getPrezzo() != null) art.setPrezzo(req.getPrezzo());
+	    if (req.getUrlImmagine() != null) art.setUrlImmagine(req.getUrlImmagine());
+
+	    // logica per distinguere
+	    if (req.getTagliaScarpe() != null && req.getTagliaIndumento() != null)  {
+	        throw new AcademyException ("Entrambe le taglie non vanno bene");
+	        
+	    } if (req.getTagliaScarpe() != null && art.getTagliaScarpe() != null)  {
+	        art.setTagliaScarpe(req.getTagliaScarpe());
+	    }  if (req.getTagliaIndumento() != null && art.getTagliaIndumento() != null)  {
+	        art.setTagliaIndumento(req.getTagliaIndumento());
+	    }
+
+	    articoloRepository.save(art);
 	}
 
 
