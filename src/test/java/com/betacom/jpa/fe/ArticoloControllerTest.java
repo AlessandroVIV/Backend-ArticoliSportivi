@@ -2,22 +2,20 @@ package com.betacom.jpa.fe;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.jpa.controllers.ArticoloController;
 import com.betacom.jpa.dto.ArticoloDTO;
 import com.betacom.jpa.exception.AcademyException;
+import com.betacom.jpa.models.Articolo;
 import com.betacom.jpa.models.Categoria;
 import com.betacom.jpa.models.Genere;
 import com.betacom.jpa.models.Marca;
-import com.betacom.jpa.repositories.IArticoloRepository;
 import com.betacom.jpa.repositories.ICategoriaRepository;
 import com.betacom.jpa.repositories.IGenereRepository;
 import com.betacom.jpa.repositories.IMarcaRepository;
@@ -81,9 +79,35 @@ public class ArticoloControllerTest {
         ResponseBase r = articoloController.create(req);
         Assertions.assertThat(r.isRc()).isTrue();
     }
-
+    
     @Test
     @Order(2)
+    public void createScarpaEsistenteTest() {
+        ArticoloScarpaReq req = new ArticoloScarpaReq();
+        req.setNome("Nike Air Test");
+        req.setMarca("Nike");
+        req.setCategoria("Scarpe");
+        req.setGenere("Uomo");
+
+        ResponseBase r = articoloController.create(req);
+        Assertions.assertThat(r.isRc()).isFalse();
+    }
+
+    @Test
+    @Order(3)
+    public void getArticoloTest() {
+    	Articolo a = null;
+		try {
+			a = articoloController.getArticolo(1L);
+		} catch (AcademyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        Assertions.assertThat("Nike Air Test").isEqualTo(a.getNome());
+    }
+    
+    @Test
+    @Order(4)
     public void createIndumentoTest() {
         ArticoloIndumentoReq req = new ArticoloIndumentoReq();
         req.setNomeArticolo("Maglietta Running");
@@ -94,9 +118,22 @@ public class ArticoloControllerTest {
         ResponseBase r = articoloController.createIndumento(req);
         Assertions.assertThat(r.isRc()).isTrue();
     }
+    
+    @Test
+    @Order(5)
+    public void createIndumentoEsistenteTest() {
+        ArticoloIndumentoReq req = new ArticoloIndumentoReq();
+        req.setNomeArticolo("Maglietta Running");
+        req.setMarca("Adidas");
+        req.setCategoria("Indumenti");
+        req.setGenere("Donna");
+
+        ResponseBase r = articoloController.createIndumento(req);
+        Assertions.assertThat(r.isRc()).isFalse();
+    }
 
     @Test
-    @Order(3)
+    @Order(6)
     public void listAllTest() {
         ResponseList<ArticoloDTO> r = articoloController.listAll();
         Assertions.assertThat(r.isRc()).isTrue();
@@ -104,23 +141,47 @@ public class ArticoloControllerTest {
     }
 
     @Test
-    @Order(4)
+    @Order(7)
     public void getByCategoriaTest() {
         ResponseList<ArticoloDTO> r = articoloController.getByCategoria("Scarpe");
         Assertions.assertThat(r.isRc()).isTrue();
         Assertions.assertThat(r.getDati()).isNotEmpty();
     }
+    
+    @Test
+    @Order(8)
+    public void getByCategoriaInesistenteTest() {
+        ResponseList<ArticoloDTO> r = articoloController.getByCategoria("Felpa");
+        Assertions.assertThat(r.isRc()).isTrue();
+        Assertions.assertThat(r.getDati()).isEmpty();
+    }
 
     @Test
-    @Order(5)
+    @Order(9)
     public void getByGenereTest() {
         ResponseList<ArticoloDTO> r = articoloController.getByGenere("Uomo");
         Assertions.assertThat(r.isRc()).isTrue();
         Assertions.assertThat(r.getDati()).isNotEmpty();
     }
+    
+    @Test
+    @Order(10)
+    public void getByGenereInesistenteTest() {
+        ResponseList<ArticoloDTO> r = articoloController.getByGenere("Inesistente");
+        Assertions.assertThat(r.isRc()).isTrue();
+        Assertions.assertThat(r.getDati()).isEmpty();
+    }
+    
+    @Test
+    @Order(11)
+    public void getByMarcaTest() {
+        ResponseList<ArticoloDTO> r = articoloController.getByMarca("Nike");
+        Assertions.assertThat(r.isRc()).isTrue();
+        Assertions.assertThat(r.getDati()).isNotEmpty();
+    }
 
     @Test
-    @Order(6)
+    @Order(12)
     public void updateArticoloTest() {
         // recuperiamo il primo articolo creato per prendere l'ID reale
         ResponseList<ArticoloDTO> list = articoloController.listAll();
@@ -135,9 +196,24 @@ public class ArticoloControllerTest {
         ResponseBase r = articoloController.update(updateReq);
         Assertions.assertThat(r.isRc()).isTrue();
     }
+    
+    @Test
+    @Order(13)
+    public void updateArticoloInesistenteTest() {
+        // recuperiamo il primo articolo creato per prendere l'ID reale
+        ResponseList<ArticoloDTO> list = articoloController.listAll();
+        Assertions.assertThat(list.getDati()).isNotEmpty();
+
+        ArticoloReq updateReq = new ArticoloReq();
+        updateReq.setId(50);
+        updateReq.setNome("Felpa");
+
+        ResponseBase r = articoloController.update(updateReq);
+        Assertions.assertThat(r.isRc()).isFalse();
+    }
 
     @Test
-    @Order(7)
+    @Order(14)
     public void deleteArticoloTest() {
         // prendiamo l'ID reale dell'articolo da cancellare
         ResponseList<ArticoloDTO> list = articoloController.listAll();
@@ -149,7 +225,7 @@ public class ArticoloControllerTest {
     }
 
     @Test
-    @Order(8)
+    @Order(15)
     public void deleteArticoloInesistenteTest() {
         ResponseBase r = articoloController.delete(9999);
         Assertions.assertThat(r.isRc()).isFalse();
