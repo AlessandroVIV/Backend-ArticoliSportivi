@@ -17,7 +17,6 @@ import com.betacom.jpa.response.ResponseList;
 import com.betacom.jpa.services.interfaces.ICategoriaInterfaces;
 
 @CrossOrigin("*")
-
 @RestController
 @RequestMapping("/rest/categoria")
 public class CategoriaController {

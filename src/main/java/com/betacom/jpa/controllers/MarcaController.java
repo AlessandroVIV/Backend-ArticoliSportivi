@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.jpa.dto.MarcaDTO;
+import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.requests.MarcaReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
@@ -39,42 +40,18 @@ public class MarcaController {
 	}
 	
 	@PostMapping("/createMarca")
-	public ResponseBase create(@RequestBody(required = true) MarcaReq req) {
-		ResponseBase responseBase = new ResponseBase();
-		try {
-			marcaInterfaces.createMarca(req);
-			responseBase.setRc(true);
-		} catch (Exception e) {
-			responseBase.setRc(false);
-			responseBase.setMsg(e.getMessage());
-		}
-		return responseBase;
+	public ResponseBase create(@RequestBody MarcaReq req) throws AcademyException {
+	    return marcaInterfaces.createMarca(req);
 	}
 	
 	@PutMapping("/updateMarca")
-	public ResponseBase update(@RequestBody(required = true) MarcaReq req) {
-		ResponseBase responseBase = new ResponseBase();
-		try {
-			marcaInterfaces.updateMarca(req);
-			responseBase.setRc(true);
-		} catch (Exception e) {
-			responseBase.setRc(false);
-			responseBase.setMsg(e.getMessage());
-		}
-		return responseBase;
+	public ResponseBase update(@RequestBody MarcaReq req) throws AcademyException {
+	    return marcaInterfaces.updateMarca(req);
 	}
-	
+
 	@DeleteMapping("/deleteMarca")
-	public ResponseBase delete(@RequestBody(required = true) MarcaReq req) {
-		ResponseBase responseBase = new ResponseBase();
-		try {
-			marcaInterfaces.deleteMarca(req);
-			responseBase.setRc(true);
-		} catch (Exception e) {
-			responseBase.setRc(false);
-			responseBase.setMsg(e.getMessage());
-		}
-		return responseBase;
+	public ResponseBase delete(@RequestBody MarcaReq req) throws AcademyException {
+	    return marcaInterfaces.deleteMarca(req);
 	}
 	
 	
