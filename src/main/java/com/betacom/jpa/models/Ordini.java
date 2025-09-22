@@ -29,7 +29,7 @@ public class Ordini {
     @JoinColumn(name = "utente_id", nullable = false)
     private Utente utente;
 
-    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarrelloItem> items;
 
     private LocalDateTime dataOrdine;

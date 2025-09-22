@@ -1,12 +1,12 @@
 package com.betacom.jpa.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +32,7 @@ public class Carrello {
     @JsonIgnore
     private Utente utente;
     
-    @OneToMany(mappedBy = "carrello", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CarrelloItem> articoli;
-	
+    @OneToMany(mappedBy = "carrello", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CarrelloItem> articoli = new ArrayList<>(); 
+    
 }

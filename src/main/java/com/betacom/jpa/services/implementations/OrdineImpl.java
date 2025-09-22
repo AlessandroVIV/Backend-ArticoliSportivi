@@ -34,11 +34,14 @@ public class OrdineImpl implements IOrdineInterfaces{
 	private IOrdineRepository ordineRepository;
 
 	public void createOrdine(OrdineRequest req) {
-		
 	    Utente utente = utenteRepository.findById(req.getUtenteId())
 	            .orElseThrow(() -> new RuntimeException("Utente non trovato"));
 
 	    Carrello carrello = utente.getCarrello();
+	    if (carrello == null || carrello.getArticoli() == null || carrello.getArticoli().isEmpty()) {
+	        throw new RuntimeException("Carrello vuoto, impossibile creare ordine");
+	    }
+
 	    List<CarrelloItem> items = carrello.getArticoli();
 
 	    Ordini ordine = new Ordini();
@@ -46,7 +49,6 @@ public class OrdineImpl implements IOrdineInterfaces{
 	    ordine.setDataOrdine(LocalDateTime.now());
 
 	    List<CarrelloItem> ordineItems = new ArrayList<>();
-
 	    for (CarrelloItem item : items) {
 	        CarrelloItem ordineItem = new CarrelloItem();
 	        ordineItem.setArticolo(item.getArticolo());
@@ -58,10 +60,12 @@ public class OrdineImpl implements IOrdineInterfaces{
 	    }
 
 	    ordine.setItems(ordineItems);
-
+	    
+	    carrello.getArticoli().clear();
+	    
 	    ordineRepository.save(ordine);
-
 	}
+
 	
 	@Override
 	public List<OrdineDTO> listAll() {

@@ -16,6 +16,7 @@ import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
 import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
+import com.betacom.jpa.response.ResponseObject;
 import com.betacom.jpa.services.interfaces.IUtenteInterfaces;
 
 @CrossOrigin("*")
@@ -27,7 +28,7 @@ public class UtenteController {
 	private IUtenteInterfaces utenteInterfaces;
 	
 	@PostMapping("/createUtente")
-	ResponseBase create(@RequestBody(required = true) UtenteReq req) {
+	public ResponseBase create(@RequestBody(required = true) UtenteReq req) {
 		ResponseBase responseBase = new ResponseBase();
 		try {
 			utenteInterfaces.createUtente(req);
@@ -79,8 +80,19 @@ public class UtenteController {
 	}
 	
 	@PostMapping("/login")
-	public LoginDTO signIn(@RequestBody (required = true) LoginReq req) {
-		return utenteInterfaces.login(req);
+	public ResponseObject<LoginDTO> login(@RequestBody LoginReq req) {
+	    ResponseObject<LoginDTO> responseObject = new ResponseObject<>();
+	    try {
+	        LoginDTO loginDTO = utenteInterfaces.login(req);
+	        responseObject.setRc(true);
+	        responseObject.setDati(loginDTO);
+	    } catch (Exception e) {
+	        responseObject.setRc(false);
+	        responseObject.setMsg(e.getMessage());
+	    }
+	    return responseObject;
 	}
+
+
 	
 }
