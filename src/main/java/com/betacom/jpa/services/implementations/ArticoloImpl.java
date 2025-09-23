@@ -14,6 +14,7 @@ import com.betacom.jpa.models.Categoria;
 import com.betacom.jpa.models.Genere;
 import com.betacom.jpa.models.Marca;
 import com.betacom.jpa.repositories.IArticoloRepository;
+import com.betacom.jpa.repositories.ICarrelloItemRepository;
 import com.betacom.jpa.repositories.ICategoriaRepository;
 import com.betacom.jpa.repositories.IGenereRepository;
 import com.betacom.jpa.repositories.IMarcaRepository;
@@ -23,6 +24,7 @@ import com.betacom.jpa.requests.ArticoloScarpaReq;
 import com.betacom.jpa.services.interfaces.IArticoloInterfaces;
 import com.betacom.jpa.utility.Builders;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -40,6 +42,9 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	
 	@Autowired
 	private IMarcaRepository marcaRepository;
+	
+	@Autowired
+	private ICarrelloItemRepository carrelloItemRepository;
 	
 	@Override
 	public void createScarpa(ArticoloScarpaReq req) throws AcademyException {
@@ -207,17 +212,20 @@ public class ArticoloImpl extends Builders implements IArticoloInterfaces{
 	}
 
 
+	@Transactional
 	@Override
 	public void deleteArticolo(Integer id) throws AcademyException {
-		
-		log.debug("Delete Scarpa con id: " + id);
-	    
+	    log.debug("Delete Articolo con id: " + id);
+
 	    Optional<Articolo> art = articoloRepository.findById(id);
-	    
-	    if(art.isEmpty()) throw new AcademyException("Articolo non trovato nel database con id:" + id);
+
+	    if (art.isEmpty()) {
+	        throw new AcademyException("Articolo non trovato nel database con id: " + id);
+	    }
+
+	    carrelloItemRepository.deleteByArticoloId(id);
 
 	    articoloRepository.delete(art.get());
-		
 	}
 
 }

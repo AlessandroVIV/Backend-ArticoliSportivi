@@ -16,6 +16,7 @@ import com.betacom.jpa.repositories.IUtenteRepository;
 import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
 import com.betacom.jpa.services.interfaces.IUtenteInterfaces;
+import com.betacom.jpa.utility.Roles;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -42,11 +43,14 @@ public class UtenteImpl implements IUtenteInterfaces {
 		utente.setPassword(req.getPassword());
 		utente.setEmail(req.getEmail());
 		utente.setRole(req.getRole());
-
-		Carrello carrello = new Carrello();
-
-		utente.setCarrello(carrello);
-		carrello.setUtente(utente);
+		
+		if(req.getRole() == Roles.USER) {
+			Carrello carrello = new Carrello();
+			utente.setCarrello(carrello);
+			carrello.setUtente(utente);
+		} else {
+			log.debug("Carrello non creato per l'admin");
+		}
 
 		return utenteRepository.save(utente);
 
