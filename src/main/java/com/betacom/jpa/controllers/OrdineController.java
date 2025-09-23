@@ -39,26 +39,26 @@ public class OrdineController {
 		return responseBase;
 	}
 	
-//    @GetMapping("/listAll")
-//    public ResponseList<OrdineDTO> listAll() {
-//        ResponseList<OrdineDTO> r = new ResponseList<>();
-//        try {
-//            r.setDati(ordineInterfaces.listAll());
-//            r.setRc(true);
-//        } catch (Exception e) {
-//            r.setRc(false);
-//            r.setMsg(e.getMessage());
-//        }
-//        return r;
-//    }
-//    
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> getOrdineById(@PathVariable Integer id) {
-//        try {
-//            return ResponseEntity.ok(ordineInterfaces.listById(id));
-//        } catch (AcademyException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
+    @GetMapping("/listAll")
+    public ResponseList<OrdineDTO> listAll() {
+        ResponseList<OrdineDTO> r = new ResponseList<>();
+        try {
+            r.setDati(ordineInterfaces.listAll());
+            r.setRc(true);
+        } catch (Exception e) {
+            r.setRc(false);
+            r.setMsg(e.getMessage());
+        }
+        return r;
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrdineById(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(ordineInterfaces.listById(id));
+        } catch (AcademyException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 	
 }

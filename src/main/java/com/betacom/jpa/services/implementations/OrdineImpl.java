@@ -38,6 +38,9 @@ public class OrdineImpl implements IOrdineInterfaces{
 	            .orElseThrow(() -> new RuntimeException("Utente non trovato"));
 
 	    Carrello carrello = utente.getCarrello();
+	    
+	    log.info("carrello size: " + carrello.getArticoli().size());
+	    
 	    if (carrello == null || carrello.getArticoli() == null || carrello.getArticoli().isEmpty()) {
 	        throw new RuntimeException("Carrello vuoto, impossibile creare ordine");
 	    }

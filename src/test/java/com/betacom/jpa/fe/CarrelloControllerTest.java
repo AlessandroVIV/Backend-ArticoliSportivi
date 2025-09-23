@@ -1,17 +1,33 @@
 package com.betacom.jpa.fe;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.betacom.jpa.controllers.CarrelloController;
 import com.betacom.jpa.dto.CarrelloItemDTO;
-import com.betacom.jpa.models.*;
-import com.betacom.jpa.repositories.*;
+import com.betacom.jpa.models.Articolo;
+import com.betacom.jpa.models.Carrello;
+import com.betacom.jpa.models.Categoria;
+import com.betacom.jpa.models.Genere;
+import com.betacom.jpa.models.Marca;
+import com.betacom.jpa.models.Utente;
+import com.betacom.jpa.repositories.IArticoloRepository;
+import com.betacom.jpa.repositories.ICategoriaRepository;
+import com.betacom.jpa.repositories.IGenereRepository;
+import com.betacom.jpa.repositories.IMarcaRepository;
+import com.betacom.jpa.repositories.IUtenteRepository;
 import com.betacom.jpa.requests.CarrelloItemReq;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CarrelloControllerTest {

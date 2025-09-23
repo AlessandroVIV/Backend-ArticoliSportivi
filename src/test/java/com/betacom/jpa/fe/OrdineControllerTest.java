@@ -1,134 +1,130 @@
 package com.betacom.jpa.fe;
 
-import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.jpa.controllers.OrdineController;
-import com.betacom.jpa.dto.OrdineDTO;
-import com.betacom.jpa.models.*;
-import com.betacom.jpa.repositories.*;
+import com.betacom.jpa.models.Articolo;
+import com.betacom.jpa.models.Carrello;
+import com.betacom.jpa.models.CarrelloItem;
+import com.betacom.jpa.models.Categoria;
+import com.betacom.jpa.models.Genere;
+import com.betacom.jpa.models.Marca;
+import com.betacom.jpa.models.Utente;
+import com.betacom.jpa.repositories.IArticoloRepository;
+import com.betacom.jpa.repositories.ICarrelloItemRepository;
+import com.betacom.jpa.repositories.ICategoriaRepository;
+import com.betacom.jpa.repositories.IGenereRepository;
+import com.betacom.jpa.repositories.IMarcaRepository;
+import com.betacom.jpa.repositories.IOrdineRepository;
+import com.betacom.jpa.repositories.IUtenteRepository;
 import com.betacom.jpa.requests.OrdineRequest;
-import com.betacom.jpa.requests.UtenteReq;
 import com.betacom.jpa.response.ResponseBase;
-import com.betacom.jpa.response.ResponseList;
-import com.betacom.jpa.services.implementations.UtenteImpl;
-import com.betacom.jpa.utility.Roles;
 
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class OrdineControllerTest {
 
     @Autowired
     private OrdineController ordineController;
+    
+    @Autowired
+    private IUtenteRepository utenteRepository;
+    
+    @Autowired
+    private ICategoriaRepository categoriaRepository;
+    
+    @Autowired
+    private IGenereRepository genereRepository;
+    
+    @Autowired
+    private IMarcaRepository marcaRepository;
+    
+    @Autowired
+    private IArticoloRepository articoloRepository;
+    
+    @Autowired
+    private ICarrelloItemRepository carrelloItemRepository;
 
-    private static Integer utenteId;
+    @BeforeAll
+    public void setupAll() {
 
-//    @BeforeAll
-//    public static void setupAll(
-//            @Autowired UtenteImpl utenteService,
-//            @Autowired IUtenteRepository utenteRepository,
-//            @Autowired IArticoloRepository articoloRepository,
-//            @Autowired ICategoriaRepository categoriaRepository,
-//            @Autowired IGenereRepository genereRepository,
-//            @Autowired IMarcaRepository marcaRepository) throws Exception {
-//    	
-//    	
-//        // 1. creo un utente tramite service (così viene creato anche il carrello)
-//   	
-//        UtenteReq req = new UtenteReq();
-//        req.setNome("Luca");
-//        req.setCognome("Bianchi");
-//        req.setUsername("luca.bianchi");
-//        req.setPassword("password");
-//        req.setEmail("luca@test.com");
-//        req.setRole(Roles.USER);
-//
-//        Utente u = utenteService.createUtente(req);
-//        utenteId = u.getId();
-//
-//        // 2. creo entità necessarie per l'articolo
-//        Categoria cat = new Categoria();
-//        cat.setNome("Console");
-//        categoriaRepository.saveAndFlush(cat);
-//
-//        Genere g = new Genere();
-//        g.setNome("Unisex");
-//        genereRepository.saveAndFlush(g);
-//
-//        Marca m = new Marca();
-//        m.setNome("Microsoft");
-//        marcaRepository.saveAndFlush(m);
-//
-//        // 3. creo un articolo completo
-//        Articolo a = new Articolo();
-//        a.setNome("Xbox Series X");
-//        a.setCategoria(cat);
-//        a.setGenere(g);
-//        a.setMarca(m);
-//        a.setPrezzo(549.99);
-//        a.setDescrizione("Console next-gen Microsoft");
-//        a.setUrlImmagine("fake://img");
-//        articoloRepository.saveAndFlush(a);
-//
-//        // 4. recupero il carrello dell'utente e aggiungo un item
-//        Utente uReload = utenteRepository.findById(utenteId).orElseThrow();
-//        Carrello c = uReload.getCarrello();
-//
-//        CarrelloItem item = new CarrelloItem();
-//        item.setArticolo(a);
-//        item.setQuantita(1);
-//        item.setPrezzoTotale(549.99);
-//        item.setCarrello(c);
-//
-//        c.addArticolo(item);
-//        utenteRepository.saveAndFlush(uReload);
-//
-//    }
-//
-//    @Test
-//    @Order(1)
-//    public void createOrdineTest(@Autowired IOrdineRepository ordineRepository,
-//                                 @Autowired IUtenteRepository utenteRepository) {
-//
-//        OrdineRequest req = new OrdineRequest();
-//        req.setUtenteId(utenteId);
-//
-//        ResponseBase r = ordineController.create(req);
-//        Assertions.assertThat(r.isRc()).isTrue();
-//
-//        // verifica che sia stato creato un ordine
-//        Assertions.assertThat(ordineRepository.findAll()).isNotEmpty();
-//
-//        // verifica che il carrello dell'utente sia stato svuotato
-//        Utente uReload = utenteRepository.findById(utenteId).orElseThrow();
-//        Assertions.assertThat(uReload.getCarrello().getArticoli()).isEmpty();
-//    }
+    	Utente u = new Utente();
+        u.setNome("Luca");
+        u.setCognome("Bianchi");
+        u.setUsername("luca.bianchi");
+        u.setPassword("test");
+        u.setEmail("luca@test.com");
 
-//    @Test
-//    @Order(2)
-//    public void listAllTest() {
-//        ResponseList<OrdineDTO> r = ordineController.listAll();
-//        Assertions.assertThat(r.isRc()).isTrue();
-//        Assertions.assertThat(r.getDati()).isNotEmpty();
-//    }
-//
-//    @Test
-//    @Order(3)
-//    public void getByIdTest() {
-//        OrdineDTO first = ordineController.listAll().getDati().get(0);
-//        Object body = ordineController.getOrdineById(first.getId()).getBody();
-//        Assertions.assertThat(body).isInstanceOf(OrdineDTO.class);
-//        Assertions.assertThat(((OrdineDTO) body).getId()).isEqualTo(first.getId());
-//    }
-//
-//    @Test
-//    @Order(4)
-//    public void getByIdNotFoundTest() {
-//        Object body = ordineController.getOrdineById(99999).getBody();
-//        Assertions.assertThat(body).isInstanceOf(String.class);
-//        Assertions.assertThat(body.toString()).contains("non trovato");
-//    }
+        Carrello c = new Carrello();
+        c.setUtente(u);
+        u.setCarrello(c);
+
+        utenteRepository.saveAndFlush(u);
+
+        Categoria cat = new Categoria();
+        cat.setNome("Running");
+        categoriaRepository.saveAndFlush(cat);
+
+        Genere g = new Genere();
+        g.setNome("Uomo");
+        genereRepository.saveAndFlush(g);
+
+        Marca m = new Marca();
+        m.setNome("Nike");
+        marcaRepository.saveAndFlush(m);
+
+        Articolo a = new Articolo();
+        a.setNome("Air max");
+        a.setCategoria(cat);
+        a.setGenere(g);
+        a.setMarca(m);
+        a.setPrezzo(120.0);
+        articoloRepository.saveAndFlush(a);
+
+        CarrelloItem item = new CarrelloItem();
+        item.setArticolo(a);
+        item.setQuantita(1);
+        item.setPrezzoTotale(a.getPrezzo());
+        item.setCarrello(c);
+
+        c.getArticoli().add(item);
+        
+        carrelloItemRepository.saveAndFlush(item);
+    }
+
+    @Transactional
+    @Test
+    @Order(1)
+    public void createOrdineTest(@Autowired IOrdineRepository ordineRepository) {
+
+    	Utente u = utenteRepository.findByUsername("luca.bianchi").orElseThrow();
+
+        OrdineRequest req = new OrdineRequest();
+        req.setUtenteId(u.getId());
+
+        ResponseBase r = ordineController.create(req);
+        Assertions.assertThat(r.isRc()).isTrue();
+
+        // verifica che sia stato creato un ordine
+        Assertions.assertThat(ordineRepository.findAll()).isNotEmpty();
+
+        // ricarico il carrello dal DB
+        Utente uReload = utenteRepository.findById(u.getId()).orElseThrow();
+        Assertions.assertThat(uReload.getCarrello().getArticoli()).isEmpty();
+    }
+    
+    
+
 }

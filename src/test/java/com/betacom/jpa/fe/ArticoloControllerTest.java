@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.betacom.jpa.controllers.ArticoloController;
 import com.betacom.jpa.dto.ArticoloDTO;
@@ -27,6 +28,7 @@ import com.betacom.jpa.response.ResponseList;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class ArticoloControllerTest {
 
 	@Autowired
@@ -183,7 +185,6 @@ public class ArticoloControllerTest {
     @Test
     @Order(12)
     public void updateArticoloTest() {
-        // recuperiamo il primo articolo creato per prendere l'ID reale
         ResponseList<ArticoloDTO> list = articoloController.listAll();
         Assertions.assertThat(list.getDati()).isNotEmpty();
 
@@ -200,7 +201,6 @@ public class ArticoloControllerTest {
     @Test
     @Order(13)
     public void updateArticoloInesistenteTest() {
-        // recuperiamo il primo articolo creato per prendere l'ID reale
         ResponseList<ArticoloDTO> list = articoloController.listAll();
         Assertions.assertThat(list.getDati()).isNotEmpty();
 
@@ -215,7 +215,6 @@ public class ArticoloControllerTest {
     @Test
     @Order(14)
     public void deleteArticoloTest() {
-        // prendiamo l'ID reale dell'articolo da cancellare
         ResponseList<ArticoloDTO> list = articoloController.listAll();
         Assertions.assertThat(list.getDati()).isNotEmpty();
 

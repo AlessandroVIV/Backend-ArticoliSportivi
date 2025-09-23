@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.betacom.jpa.controllers.CategoriaController;
 import com.betacom.jpa.dto.CategoriaDTO;
@@ -16,6 +17,7 @@ import com.betacom.jpa.response.ResponseBase;
 import com.betacom.jpa.response.ResponseList;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CategoriaControllerTest {
 
