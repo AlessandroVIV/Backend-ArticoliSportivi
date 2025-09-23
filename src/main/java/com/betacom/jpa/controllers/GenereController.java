@@ -27,7 +27,7 @@ public class GenereController {
 	
 
 	@PostMapping("/createGenere")
-	ResponseBase create(@RequestBody(required = true) GenereReq req) {
+	public ResponseBase create(@RequestBody(required = true) GenereReq req) {
 		ResponseBase responseBase = new ResponseBase();
 		try {
 			genereInterfaces.createGenere(req);

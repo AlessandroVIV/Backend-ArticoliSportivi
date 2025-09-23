@@ -10,6 +10,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.jpa.controllers.OrdineController;
@@ -107,6 +108,7 @@ public class OrdineControllerTest {
     @Transactional
     @Test
     @Order(1)
+    @Rollback(false)
     public void createOrdineTest(@Autowired IOrdineRepository ordineRepository) {
 
     	Utente u = utenteRepository.findByUsername("luca.bianchi").orElseThrow();
@@ -125,6 +127,34 @@ public class OrdineControllerTest {
         Assertions.assertThat(uReload.getCarrello().getArticoli()).isEmpty();
     }
     
-    
+    @Transactional
+    @Test
+    @Order(2)
+    public void listAllOrdiniTest() {
+        var response = ordineController.listAll();
+
+        Assertions.assertThat(response).isNotNull();
+        Assertions.assertThat(response.isRc()).isTrue();
+        Assertions.assertThat(response.getDati())
+                  .isNotNull()
+                  .isNotEmpty(); // ci aspettiamo almeno 1 ordine creato nel test precedente
+    }
+
+    @Transactional
+    @Test
+    @Order(3)
+    public void getOrdineByIdTest(@Autowired IOrdineRepository ordineRepository) {
+        // recupero un ordine appena creato
+        var ordine = ordineRepository.findAll().stream()
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Nessun ordine trovato"));
+
+        var response = ordineController.getOrdineById(ordine.getId());
+
+        Assertions.assertThat(response).isNotNull();
+        Assertions.assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
+        Assertions.assertThat(response.getBody()).isNotNull();
+    }
+
 
 }

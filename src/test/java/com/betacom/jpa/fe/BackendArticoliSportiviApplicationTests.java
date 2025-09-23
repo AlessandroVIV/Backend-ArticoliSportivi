@@ -15,7 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 	ArticoloControllerTest.class,
 	CarrelloControllerTest.class,
 	OrdineControllerTest.class,
-	TagliaControllerTest.class
+	TagliaControllerTest.class,
+	GenereControllerTest.class
 			})
 
 @SpringBootTest
