@@ -12,6 +12,7 @@ import com.betacom.jpa.dto.UtenteDTO;
 import com.betacom.jpa.exception.AcademyException;
 import com.betacom.jpa.models.Carrello;
 import com.betacom.jpa.models.Utente;
+import com.betacom.jpa.repositories.ICarrelloRepository;
 import com.betacom.jpa.repositories.IUtenteRepository;
 import com.betacom.jpa.requests.LoginReq;
 import com.betacom.jpa.requests.UtenteReq;
@@ -26,6 +27,9 @@ public class UtenteImpl implements IUtenteInterfaces {
 
 	@Autowired
 	IUtenteRepository utenteRepository;
+	
+	@Autowired
+	private ICarrelloRepository carrelloRepository;
 
 	@Override
 	public Utente createUtente(UtenteReq req) throws AcademyException {
@@ -93,16 +97,25 @@ public class UtenteImpl implements IUtenteInterfaces {
 	@Override
 	public Utente deleteUtente(UtenteReq req) throws AcademyException {
 
-		log.debug("Delete utente con id: " + req.getId());
+	    log.debug("Delete utente con id: " + req.getId());
 
-		Utente utente = utenteRepository.findById(req.getId())
-				.orElseThrow(() -> new AcademyException("Utente non trovato nel database con id: " + req.getId()));
+	    Utente utente = utenteRepository.findById(req.getId())
+	            .orElseThrow(() -> new AcademyException("Utente non trovato nel database con id: " + req.getId()));
 
-		utenteRepository.delete(utente);
+	    Carrello carrello = carrelloRepository.findByUtenteId(req.getId());
+	    
+	    if (carrello != null) {
+	        carrelloRepository.delete(carrello);
+	        log.debug("Carrello cancellato per utente con id: " + req.getId());
+	    }
 
-		return utente;
+	    utenteRepository.delete(utente);
+	    
+	    log.debug("Utente cancellato con id: " + req.getId());
 
+	    return utente;
 	}
+
 
 	@Override
 	public LoginDTO login(LoginReq req) {

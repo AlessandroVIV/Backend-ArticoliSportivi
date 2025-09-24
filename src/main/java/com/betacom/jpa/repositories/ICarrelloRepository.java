@@ -6,4 +6,6 @@ import com.betacom.jpa.models.Carrello;
 
 public interface ICarrelloRepository extends JpaRepository<Carrello, Integer>{
 
+	Carrello findByUtenteId(Integer utenteId);
+	
 }
