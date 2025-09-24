@@ -1,9 +1,12 @@
 package com.betacom.jpa.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +21,17 @@ import com.betacom.jpa.requests.CarrelloItemReq;
 import com.betacom.jpa.services.interfaces.ICarrelloItemInterfaces;
 
 @CrossOrigin("*")
-
 @RestController
 @RequestMapping("/rest/carrello")
 public class CarrelloController {
 
     @Autowired
     private ICarrelloItemInterfaces carrelloItemInterfaces;
+    
+    @GetMapping("/{utenteId}/items")
+    public ResponseEntity<List<CarrelloItemDTO>> getItems(@PathVariable Integer utenteId) {
+        return ResponseEntity.ok(carrelloItemInterfaces.getItemsByUtente(utenteId));
+    }
     
     @PostMapping("/{utenteId}/items")
     public ResponseEntity<CarrelloItemDTO> aggiungiItem(

@@ -1,5 +1,7 @@
 package com.betacom.jpa.services.implementations;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,19 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
 
     @Autowired
     private ICarrelloItemRepository carrelloItemRepository;
+    
+    @Override
+    public List<CarrelloItemDTO> getItemsByUtente(Integer utenteId) {
+        Utente utente = utenteRepository.findById(utenteId)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+
+        Carrello carrello = utente.getCarrello();
+
+        List<CarrelloItem> items = carrelloItemRepository.findByCarrelloId(carrello.getId());
+
+        return items.stream().map(this::toDTO).toList();
+    }
+
 
     @Override
     public CarrelloItemDTO aggiungiItem(Integer utenteId, CarrelloItemReq req) {
