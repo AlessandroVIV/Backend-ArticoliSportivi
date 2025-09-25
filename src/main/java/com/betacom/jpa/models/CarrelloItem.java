@@ -32,7 +32,8 @@ public class CarrelloItem {
     @JoinColumn(name = "ordine_id")
     private Ordini ordine;
 
-
+    private String taglia;
+    
     private Integer quantita;
     
     private Double prezzoTotale;

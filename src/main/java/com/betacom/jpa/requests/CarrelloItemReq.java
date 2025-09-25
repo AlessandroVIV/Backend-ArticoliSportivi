@@ -11,5 +11,6 @@ public class CarrelloItemReq {
 
 	private Integer articoloId;
 	private Integer quantita;
+	private String taglia;
 	
 }

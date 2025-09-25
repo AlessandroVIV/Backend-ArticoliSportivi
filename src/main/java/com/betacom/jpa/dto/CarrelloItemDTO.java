@@ -16,5 +16,6 @@ public class CarrelloItemDTO {
     private Articolo articolo;
     private Integer quantita;   
     private Double prezzoTotale;
+    private String taglia;
 	
 }

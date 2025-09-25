@@ -48,25 +48,26 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
 
     @Override
     public CarrelloItemDTO aggiungiItem(Integer utenteId, CarrelloItemReq req) {
-    	
         Utente utente = utenteRepository.findById(utenteId)
-                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
+            .orElseThrow(() -> new RuntimeException("Utente non trovato"));
 
         Carrello carrello = utente.getCarrello();
 
         Articolo articolo = articoloRepository.findById(req.getArticoloId())
-                .orElseThrow(() -> new RuntimeException("Articolo non trovato"));
+            .orElseThrow(() -> new RuntimeException("Articolo non trovato"));
 
         CarrelloItem item = new CarrelloItem();
         item.setCarrello(carrello);
         item.setArticolo(articolo);
         item.setQuantita(req.getQuantita());
         item.setPrezzoTotale(articolo.getPrezzo() * req.getQuantita());
+        item.setTaglia(req.getTaglia()); 
 
         CarrelloItem saved = carrelloItemRepository.save(item);
 
-        return toDTO(saved); 
+        return toDTO(saved);
     }
+
     
     @Override
     public void rimuoviItem(Integer utenteId, Integer carrelloItemId) {
@@ -91,6 +92,7 @@ public class CarrelloItemImpl implements ICarrelloItemInterfaces {
         dto.setId(item.getId());
         dto.setQuantita(item.getQuantita());
         dto.setPrezzoTotale(item.getPrezzoTotale());
+        dto.setTaglia(item.getTaglia());
 
         CarrelloDTO carrelloDTO = new CarrelloDTO();
         carrelloDTO.setId(item.getCarrello().getId());
