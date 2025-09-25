@@ -60,5 +60,15 @@ public class OrdineController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    
+    @GetMapping("/dettaglio/{id}")
+    public ResponseEntity<?> getOrdineConArticoli(@PathVariable Integer id) {
+        try {
+            OrdineDTO ordine = ordineInterfaces.listById(id);
+            return ResponseEntity.ok(ordine);
+        } catch (AcademyException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 	
 }

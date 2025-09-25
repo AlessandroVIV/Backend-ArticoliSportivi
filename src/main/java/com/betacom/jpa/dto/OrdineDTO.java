@@ -11,6 +11,6 @@ import lombok.Setter;
 public class OrdineDTO {
     private Integer id;
     private UtenteDTO utente;
-    private List<CarrelloItemDTO> items;
+    private List<ArticoloOrdinatoDTO> items;
     private LocalDateTime dataOrdine;
 }

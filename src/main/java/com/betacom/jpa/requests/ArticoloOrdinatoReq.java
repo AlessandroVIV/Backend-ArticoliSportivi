@@ -1,0 +1,16 @@
+package com.betacom.jpa.requests;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class ArticoloOrdinatoReq {
+
+	private Integer articoloId;
+	private Integer quantita;
+	private String taglia;
+	
+}
