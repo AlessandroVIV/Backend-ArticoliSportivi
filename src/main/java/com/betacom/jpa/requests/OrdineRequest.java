@@ -10,5 +10,5 @@ import lombok.ToString;
 public class OrdineRequest {
 
 	private Integer utenteId;
-	
+	private String indirizzo;
 }

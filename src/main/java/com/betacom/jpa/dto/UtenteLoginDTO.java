@@ -13,6 +13,8 @@ public class UtenteLoginDTO {
 	
 	private String userName;
 	private String pwd;
+	private String nome; 
+	private String cognome; 
 	private String email;
 	private String role;
 	

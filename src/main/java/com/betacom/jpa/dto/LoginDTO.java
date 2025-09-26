@@ -14,5 +14,8 @@ public class LoginDTO {
 	private Integer id;
 	private Boolean logged;
 	private String role;
+	private String nome;    
+    private String cognome;   
+    private String email;
 	
 }

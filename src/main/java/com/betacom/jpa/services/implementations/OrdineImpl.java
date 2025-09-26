@@ -57,6 +57,7 @@ public class OrdineImpl implements IOrdineInterfaces {
 		Ordini ordine = new Ordini();
 		ordine.setUtente(utente);
 		ordine.setDataOrdine(LocalDateTime.now());
+		ordine.setIndirizzo(req.getIndirizzo());
 		ordine = ordineRepository.save(ordine); // salvo subito per generare l'ID
 
 		// Creo gli articoli ordinati

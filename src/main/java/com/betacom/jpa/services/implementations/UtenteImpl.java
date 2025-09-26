@@ -119,20 +119,22 @@ public class UtenteImpl implements IUtenteInterfaces {
 
 	@Override
 	public LoginDTO login(LoginReq req) {
+	    LoginDTO r = new LoginDTO();
+	    Optional<Utente> u = utenteRepository.findByUsernameAndPassword(req.getUser(), req.getPassword());
 
-		log.debug("login :" + req);
-
-		LoginDTO r = new LoginDTO();
-		Optional<Utente> u = utenteRepository.findByUsernameAndPassword(req.getUser(), req.getPassword());
-
-		if (u.isEmpty()) {
-			r.setLogged(false);
-		} else {
-			r.setId(u.get().getId());
-			r.setLogged(true);
-			r.setRole(u.get().getRole().toString());
-		}
-		return r;
+	    if (u.isEmpty()) {
+	        r.setLogged(false);
+	    } else {
+	        Utente utente = u.get();
+	        r.setId(utente.getId());
+	        r.setLogged(true);
+	        r.setRole(utente.getRole().toString());
+	        r.setNome(utente.getNome());
+	        r.setCognome(utente.getCognome());
+	        r.setEmail(utente.getEmail());
+	    }
+	    return r;
 	}
+
 
 }

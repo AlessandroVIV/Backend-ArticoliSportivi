@@ -83,7 +83,12 @@ public class UtenteController {
 	public ResponseObject<LoginDTO> login(@RequestBody LoginReq req) {
 	    ResponseObject<LoginDTO> responseObject = new ResponseObject<>();
 	    try {
-	        LoginDTO loginDTO = utenteInterfaces.login(req);
+	        LoginDTO loginDTO = utenteInterfaces.login(req); // deve già avere nome, cognome, email
+
+	        if (loginDTO != null && loginDTO.getLogged() != null && loginDTO.getLogged()) {
+	            loginDTO.setLogged(true); // facoltativo, ma coerente
+	        }
+
 	        responseObject.setRc(true);
 	        responseObject.setDati(loginDTO);
 	    } catch (Exception e) {
@@ -92,6 +97,7 @@ public class UtenteController {
 	    }
 	    return responseObject;
 	}
+
 
 
 	

@@ -31,6 +31,8 @@ public class Ordini {
 
     @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArticoloOrdinato> items;
+    
+    private String indirizzo;
 
     private LocalDateTime dataOrdine;
 }
