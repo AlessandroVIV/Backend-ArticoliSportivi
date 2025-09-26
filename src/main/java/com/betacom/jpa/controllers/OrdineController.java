@@ -1,5 +1,7 @@
 package com.betacom.jpa.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,6 +71,11 @@ public class OrdineController {
         } catch (AcademyException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+    
+    @GetMapping("/utente/{utenteId}")
+    public List<OrdineDTO> getOrdiniByUtente(@PathVariable Integer utenteId) throws AcademyException {
+        return ordineInterfaces.listByUtente(utenteId);
     }
 	
 }

@@ -13,4 +13,5 @@ public class OrdineDTO {
     private UtenteDTO utente;
     private List<ArticoloOrdinatoDTO> items;
     private LocalDateTime dataOrdine;
+    private String indirizzo;
 }

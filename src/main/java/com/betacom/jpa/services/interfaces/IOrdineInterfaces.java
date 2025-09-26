@@ -14,4 +14,5 @@ public interface IOrdineInterfaces {
 	
 	OrdineDTO listById(Integer id) throws AcademyException;
 	
+	List<OrdineDTO> listByUtente(Integer utenteId) throws AcademyException;
 }

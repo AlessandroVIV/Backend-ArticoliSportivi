@@ -87,6 +87,7 @@ public class OrdineImpl implements IOrdineInterfaces {
 	    OrdineDTO dto = new OrdineDTO();
 	    dto.setId(ordine.getId());
 	    dto.setDataOrdine(ordine.getDataOrdine());
+	    dto.setIndirizzo(ordine.getIndirizzo());
 
 	    // Mapping Utente
 	    UtenteDTO utenteDTO = new UtenteDTO();
@@ -119,6 +120,8 @@ public class OrdineImpl implements IOrdineInterfaces {
 	        articoloDTO.setNomeArticolo(entity.getArticolo().getNome());
 	        articoloDTO.setDescrizione(entity.getArticolo().getDescrizione());
 	        articoloDTO.setPrezzo(entity.getArticolo().getPrezzo());
+	        articoloDTO.setUrlImmagine(entity.getArticolo().getUrlImmagine());
+
 	        dto.setArticolo(articoloDTO);
 	    }
 
@@ -130,6 +133,19 @@ public class OrdineImpl implements IOrdineInterfaces {
 		Ordini ordine = ordineRepository.findById(id)
 				.orElseThrow(() -> new AcademyException("Ordine con id " + id + " non trovato!"));
 		return toDTO(ordine);
+	}
+
+	@Override
+	public List<OrdineDTO> listByUtente(Integer utenteId) throws AcademyException {
+		// TODO Auto-generated method stub
+		try {
+	        List<Ordini> ordini = ordineRepository.findByUtenteId(utenteId);
+	        return ordini.stream()
+	                .map(this::toDTO)
+	                .toList();
+	    } catch (Exception e) {
+	        throw new AcademyException("Errore nel recupero ordini utente");
+	    }
 	}
 
 }
